@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import querystring from 'query-string';
-import * as actions from '../../actions/index';
-import { getProperties } from '../../selectors';
+import * as actions from '../actions/index';
+import { getProperties } from '../selectors';
+import PropertyItem from '../components/property/PropertyItem';
 
-class Property extends Component {
+class Properties extends Component {
   componentWillMount() {
     const query = this.props.location.query;
     this.props.fetchProperties({ ...query });
@@ -25,7 +26,13 @@ class Property extends Component {
       <div>
         {
           properties.map(x => (
-            <h2 key={x.id}>{x.address} {x.city}, {x.state} {x.zipcode}</h2>
+            <PropertyItem
+              key={x.id} 
+              address={x.address}
+              city={x.city}
+              state={x.state}
+              zipcode={x.zipcode} 
+            />
           ))
         }
       </div>
@@ -33,13 +40,13 @@ class Property extends Component {
   }
 }
 
-Property.propTypes = {
+Properties.propTypes = {
   fetchProperties: PropTypes.func.isRequired,
   properties: PropTypes.array.isRequired,
   location: PropTypes.object
 };
 
-Property.defaultProps = {
+Properties.defaultProps = {
   location: {}
 };
 
@@ -47,4 +54,4 @@ const mapStateToProps = state => ({
   properties: getProperties(state)
 });
 
-export default connect(mapStateToProps, actions)(Property);
+export default connect(mapStateToProps, actions)(Properties);
