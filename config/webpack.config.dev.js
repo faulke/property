@@ -144,6 +144,7 @@ module.exports = {
           /\.gif$/,
           /\.jpe?g$/,
           /\.png$/,
+          /\.less$/
         ],
         loader: require.resolve('file-loader'),
         options: {
@@ -210,6 +211,26 @@ module.exports = {
             },
           },
         ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          { loader: "style-loader" }, 
+          { loader: "css-loader",
+            options: {
+              sourceMap: true,
+              importLoaders: 2,
+              modules: true
+            } 
+          }, 
+          { loader: "less-loader", 
+            options: {
+              sourcemap: true,
+              strictMath: true,
+              noIeCompat: true
+            }
+          }
+        ]
       },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.
