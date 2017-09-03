@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import { testReducer } from './testReducer';
+import { properties } from './properties';
+import { auth } from './auth';
 
 const rootReducer = combineReducers({
-  testReducer
+  properties,
+  auth
 });
 
 export default rootReducer;
