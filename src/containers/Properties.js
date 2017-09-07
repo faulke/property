@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 import querystring from 'query-string';
 import * as actions from '../actions/index';
 import { getProperties } from '../selectors';
@@ -35,6 +36,7 @@ class Properties extends Component {
             />
           ))
         }
+        <Link to="/properties/add">Add property</Link>
       </div>
     );
   }
