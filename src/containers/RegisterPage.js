@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import FormTemplate from './shared/FormTemplate';
 import * as actions from '../actions/index';
-import { getRegister } from '../selectors';
+import { getAuth } from '../selectors';
 import RegisterForm from '../components/account/RegisterForm';
 
 class RegisterPage extends FormTemplate {
@@ -11,6 +11,13 @@ class RegisterPage extends FormTemplate {
     super(props);
 
     this.submitForm = this.submitForm.bind(this);
+  }
+
+  componentWillMount() {
+    const { name, clearLocalUser } = this.props;
+    if (name) {
+      clearLocalUser();
+    }
   }
 
   submitForm(evt) {
@@ -38,17 +45,20 @@ class RegisterPage extends FormTemplate {
 RegisterPage.propTypes = {
   email: React.PropTypes.string,
   password: React.PropTypes.string,
-  register: React.PropTypes.func.isRequired
+  register: React.PropTypes.func.isRequired,
+  clearLocalUser: React.PropTypes.func.isRequired
 };
 
 RegisterPage.defaultProps = {
   email: '',
-  password: ''
+  password: '',
+  name: null
 };
 
 const mapStateToProps = state => ({
-  email: getRegister(state).email,
-  password: getRegister(state).password
+  email: getAuth(state).email,
+  password: getAuth(state).password,
+  name: getAuth(state).name
 });
 
 export default connect(mapStateToProps, actions)(RegisterPage);

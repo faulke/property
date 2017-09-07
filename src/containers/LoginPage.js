@@ -14,7 +14,10 @@ class LoginPage extends FormTemplate {
   }
 
   componentWillMount() {
-    localStorage.removeItem('jwt');
+    const { name, clearLocalUser } = this.props;
+    if (name) {
+      clearLocalUser();
+    }
   }
 
   submitForm(evt) {
@@ -39,17 +42,21 @@ class LoginPage extends FormTemplate {
 LoginPage.propTypes = {
   email: React.PropTypes.string,
   password: React.PropTypes.string,
-  login: React.PropTypes.func.isRequired
+  name: React.PropTypes.string,
+  login: React.PropTypes.func.isRequired,
+  clearLocalUser: React.PropTypes.func.isRequired
 };
 
 LoginPage.defaultProps = {
   email: '',
-  password: ''
+  password: '',
+  name: null
 };
 
 const mapStateToProps = state => ({
   email: getAuth(state).email,
-  password: getAuth(state).password
+  password: getAuth(state).password,
+  name: getAuth(state).name
 });
 
 export default connect(mapStateToProps, actions)(LoginPage);
