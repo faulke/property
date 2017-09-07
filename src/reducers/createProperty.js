@@ -2,23 +2,22 @@ import { browserHistory } from 'react-router';
 import * as actions from '../actions';
 
 export const initialState = {
-  email: '',
-  password: ''
+  address: '',
+  city: '',
+  state: '',
+  zipcode: '',
+  rent: ''
 };
 
-export const auth = (state = initialState, action) => {
+export const create = (state = initialState, action) => {
   const { type, payload, source, value } = action;
   switch (type) {
     case actions.UPDATE_INPUT:
       return { ...state, [source]: value };
-    case actions.GET_AUTH_REQUEST:
+    case actions.CREATE_PROPERTY_REQUEST:
       return { ...state };
-    case actions.GET_AUTH_SUCCESS:
-      localStorage.setItem('jwt', payload.token);
+    case actions.CREATE_PROPERTY_SUCCESS:
       browserHistory.push('/properties');
-      return { ...state };
-    case actions.GET_AUTH_FAILURE:
-      browserHistory.push('/account/login');
       return { ...state };
     default:
       return { ...state };

@@ -2,9 +2,9 @@ import { CALL_API } from 'redux-api-middleware';
 import querystring from 'query-string';
 
 export const UPDATE_INPUT = 'UPDATE_INPUT';
-export const updateInput = (id, value) => ({
+export const updateInput = (name, value) => ({
   type: UPDATE_INPUT,
-  source: id,
+  source: name,
   value
 });
 
@@ -39,6 +39,27 @@ export const login = (email, password) => ({
   }
 });
 
+export const GET_REGISTER_REQUEST = 'GET_REGISTER_REQUEST';
+export const GET_REGISTER_SUCCESS = 'GET_REGISTER_SUCCESS';
+export const GET_REGISTER_FAILURE = 'GET_REGISTER_FAILURE';
+
+export const register = (email, password) => ({
+  [CALL_API]: {
+    endpoint: `/api/account/register`,
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      email,
+      password
+    }),
+    types: [
+      'GET_REGISTER_REQUEST',
+      'GET_REGISTER_SUCCESS',
+      'GET_REGISTER_FAILURE'
+    ]
+  }
+});
+
 export const GET_PROPERTIES_REQUEST = 'GET_PROPERTIES_REQUEST';
 export const GET_PROPERTIES_SUCCESS = 'GET_PROPERTIES_SUCCESS';
 export const GET_PROPERTIES_FAILURE = 'GET_PROPERTIES_FAILURE';
@@ -52,6 +73,30 @@ export const fetchProperties = ({ pets, min_sqft }) => ({
       'GET_PROPERTIES_REQUEST',
       'GET_PROPERTIES_SUCCESS',
       'GET_PROPERTIES_FAILURE'
+    ]
+  }
+});
+
+export const CREATE_PROPERTY_REQUEST = 'CREATE_PROPERTY_REQUEST';
+export const CREATE_PROPERTY_SUCCESS = 'CREATE_PROPERTY_SUCCESS';
+export const CREATE_PROPERTY_FAILURE = 'CREATE_PROPERTY_FAILURE';
+
+export const createProperty = (address, city, state, zipcode, rent) => ({
+  [CALL_API]: {
+    endpoint: `/api/properties/add`,
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      address,
+      city,
+      state,
+      zipcode,
+      rent
+    }),
+    types: [
+      'CREATE_PROPERTY_REQUEST',
+      'CREATE_PROPERTY_SUCCESS',
+      'CREATE_PROPERTY_FAILURE'
     ]
   }
 });

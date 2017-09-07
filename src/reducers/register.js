@@ -6,19 +6,17 @@ export const initialState = {
   password: ''
 };
 
-export const auth = (state = initialState, action) => {
+export const register = (state = initialState, action) => {
   const { type, payload, source, value } = action;
   switch (type) {
     case actions.UPDATE_INPUT:
       return { ...state, [source]: value };
-    case actions.GET_AUTH_REQUEST:
+    case actions.GET_REGISTER_REQUEST:
+      localStorage.removeItem('jwt');
       return { ...state };
-    case actions.GET_AUTH_SUCCESS:
+    case actions.GET_REGISTER_SUCCESS:
       localStorage.setItem('jwt', payload.token);
       browserHistory.push('/properties');
-      return { ...state };
-    case actions.GET_AUTH_FAILURE:
-      browserHistory.push('/account/login');
       return { ...state };
     default:
       return { ...state };
