@@ -10,10 +10,7 @@ export const auth = (state = initialState, action) => {
   const { type, payload, source, value } = action;
   switch (type) {
     case actions.UPDATE_INPUT:
-      if (source === 'email') {
-        return { ...state, email: value };
-      }
-      return { ...state, password: value };
+      return { ...state, [source]: value };
     case actions.GET_AUTH_REQUEST:
       return { ...state };
     case actions.GET_AUTH_SUCCESS:
