@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import querystring from 'query-string';
+import { Grid, Row } from 'react-bootstrap';
 import * as actions from '../actions/index';
 import { getProperties } from '../selectors';
 import PropertyItem from '../components/property/PropertyItem';
+import styles from './properties.less';
 
 class Properties extends Component {
   componentWillMount() {
@@ -25,18 +27,22 @@ class Properties extends Component {
     if (!properties.length) return false;
     return (
       <div>
-        {
-          properties.map(x => (
-            <PropertyItem
-              key={x.id} 
-              address={x.address}
-              city={x.city}
-              state={x.state}
-              zipcode={x.zipcode} 
-            />
-          ))
-        }
-        <Link to="/properties/add">Add property</Link>
+        <Grid fluid>
+          <Link to="/properties/add">Add property</Link>
+          <Row className={styles.propertyRow}>
+            {
+              properties.map(x => (
+                <PropertyItem
+                  key={x.id} 
+                  address={x.address}
+                  city={x.city}
+                  state={x.state}
+                  zipcode={x.zipcode} 
+                />
+              ))
+            }
+          </Row>
+        </Grid>
       </div>
     );
   }
