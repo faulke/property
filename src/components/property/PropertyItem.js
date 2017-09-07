@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Col, Row } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router';
 import styles from './propertyItem.less';
 
 const PropertyItem = ({ ...props }) => (
   <Col sm={6} className={styles.propertyContainer}>
-    <div className={styles.property}>
+    <Grid fluid className={styles.property}>
       <Row className={styles.imgContainer}>
         <div className={styles.img}>
           Image here
@@ -26,7 +26,7 @@ const PropertyItem = ({ ...props }) => (
           Additional info here
         </Col>
       </Row>
-    </div>
+    </Grid>
   </Col>
 );
 

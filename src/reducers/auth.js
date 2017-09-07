@@ -3,7 +3,8 @@ import * as actions from '../actions';
 
 export const initialState = {
   email: '',
-  password: ''
+  password: '',
+  name: null
 };
 
 export const auth = (state = initialState, action) => {
@@ -12,14 +13,21 @@ export const auth = (state = initialState, action) => {
     case actions.UPDATE_INPUT:
       return { ...state, [source]: value };
     case actions.GET_AUTH_REQUEST:
-      return { ...state };
+      localStorage.removeItem('jwt');
+      localStorage.removeItem('user');
+      return { ...state, name: null };
     case actions.GET_AUTH_SUCCESS:
       localStorage.setItem('jwt', payload.token);
+      localStorage.setItem('user', payload.user);
       browserHistory.push('/properties');
-      return { ...state };
+      return { ...state, name: payload.user };
     case actions.GET_AUTH_FAILURE:
       browserHistory.push('/account/login');
       return { ...state };
+    case actions.CLEAR_LOCAL_USER:
+      localStorage.removeItem('jwt');
+      localStorage.removeItem('user');
+      return { ...state, name: null };
     default:
       return { ...state };
   }

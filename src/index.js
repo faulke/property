@@ -6,7 +6,9 @@ import configureStore from './store/configureStore';
 import routes from './routes';
 import registerServiceWorker from './registerServiceWorker';
 
-const store = configureStore();
+const store = configureStore({
+  auth: { name: localStorage.getItem('user') } 
+});
 
 render(
   <Provider store={store}>
