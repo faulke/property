@@ -24,7 +24,6 @@ class Properties extends Component {
 
   render() {
     const { properties } = this.props;
-    if (!properties.length) return false;
     return (
       <div>
         <Grid fluid>
