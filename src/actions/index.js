@@ -39,10 +39,6 @@ export const login = (email, password) => ({
   }
 });
 
-export const GET_REGISTER_REQUEST = 'GET_REGISTER_REQUEST';
-export const GET_REGISTER_SUCCESS = 'GET_REGISTER_SUCCESS';
-export const GET_REGISTER_FAILURE = 'GET_REGISTER_FAILURE';
-
 export const register = (email, password) => ({
   [CALL_API]: {
     endpoint: `/api/account/register`,
@@ -53,9 +49,9 @@ export const register = (email, password) => ({
       password
     }),
     types: [
-      'GET_REGISTER_REQUEST',
-      'GET_REGISTER_SUCCESS',
-      'GET_REGISTER_FAILURE'
+      'GET_AUTH_REQUEST',
+      'GET_AUTH_SUCCESS',
+      'GET_AUTH_FAILURE'
     ]
   }
 });
@@ -99,4 +95,9 @@ export const createProperty = (address, city, state, zipcode, rent) => ({
       'CREATE_PROPERTY_FAILURE'
     ]
   }
+});
+
+export const CLEAR_LOCAL_USER = 'CLEAR_LOCAL_USER';
+export const clearLocalUser = () => ({
+  type: CLEAR_LOCAL_USER
 });
