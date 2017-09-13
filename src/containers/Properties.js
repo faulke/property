@@ -58,7 +58,7 @@ Properties.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  properties: getProperties(state)
+  ...getProperties(state)
 });
 
 export default connect(mapStateToProps, actions)(Properties);

@@ -48,11 +48,7 @@ AddPropertyPage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  address: createProperty(state).address,
-  city: createProperty(state).city,
-  state: createProperty(state).state,
-  zipcode: createProperty(state).zipcode,
-  rent: createProperty(state).rent,
+  ...createProperty(state)
 });
 
 export default connect(mapStateToProps, actions)(AddPropertyPage);

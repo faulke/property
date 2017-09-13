@@ -56,9 +56,7 @@ RegisterPage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  email: getAuth(state).email,
-  password: getAuth(state).password,
-  name: getAuth(state).name
+  ...getAuth(state)
 });
 
 export default connect(mapStateToProps, actions)(RegisterPage);
