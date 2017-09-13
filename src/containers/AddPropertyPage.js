@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Grid, Row, Col } from 'react-bootstrap';
 import FormTemplate from './shared/FormTemplate';
 import * as actions from '../actions/index';
 import AddPropertyForm from '../components/property/AddPropertyForm';
@@ -22,15 +23,21 @@ class AddPropertyPage extends FormTemplate {
   render() {
     const { address, city, state, zipcode, rent } = this.props;
     return (
-      <AddPropertyForm
-        submitForm={this.submitForm}
-        updateForm={this.updateInput}
-        address={address}
-        city={city}
-        state={state}
-        zipcode={zipcode}
-        rent={rent}
-      />
+      <Grid fluid style={{ flex: "auto" }}>
+        <Row>
+          <Col sm={12}>
+            <AddPropertyForm
+              submitForm={this.submitForm}
+              updateForm={this.updateInput}
+              address={address}
+              city={city}
+              state={state}
+              zipcode={zipcode}
+              rent={rent}
+            />
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }

@@ -5,16 +5,14 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
 const Sidebar = ({ ...props }) => (
-  <aside>
-    <menu>
-      <li>
-        <Link to="/properties">Properties</Link>
-      </li>
-      <li>
-        <Link to="/properties/add">Add Property</Link>
-      </li>
-    </menu>
-  </aside>
+  <menu>
+    <li>
+      <Link to="/properties">Properties</Link>
+    </li>
+    <li>
+      <Link to="/properties/add">Add Property</Link>
+    </li>
+  </menu>
 );
 
 Sidebar.propTypes = {

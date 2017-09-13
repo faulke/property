@@ -26,31 +26,29 @@ class Properties extends Component {
   render() {
     const { properties } = this.props;
     return (
-      <div>
-        <Grid fluid>
-          <Row className={styles.pageHeader}>
-            <Col sm={9}>
-              <h1 className={styles.headerTitle}>Properties</h1>
-            </Col>
-            <Col sm={3} className={styles.headerRight}>
-              <Link to="/properties/add" className={`btn btn-medium ${styles.addProperty}`}>Add property</Link>
-            </Col>
-          </Row>
-          <Row className={styles.propertyRow}>
-            {
-              properties.map(x => (
-                <PropertyItem
-                  key={x.id}
-                  address={x.address}
-                  city={x.city}
-                  state={x.state}
-                  zipcode={x.zipcode}
-                />
-              ))
-            }
-          </Row>
-        </Grid>
-      </div>
+      <Grid fluid style={{ flex: "auto" }}>
+        <Row className={styles.pageHeader}>
+          <Col xs={7}>
+            <h1 className={styles.headerTitle}>Properties</h1>
+          </Col>
+          <Col xs={5} className={styles.headerRight}>
+            <Link to="/properties/add" className={`btn btn-primary ${styles.addProperty}`}>Add property</Link>
+          </Col>
+        </Row>
+        <Row className={styles.propertyRow}>
+          {
+            properties.map(x => (
+              <PropertyItem
+                key={x.id}
+                address={x.address}
+                city={x.city}
+                state={x.state}
+                zipcode={x.zipcode}
+              />
+            ))
+          }
+        </Row>
+      </Grid>
     );
   }
 }
