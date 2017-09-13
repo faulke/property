@@ -1,23 +1,22 @@
 // This component handles the App template used on every page.
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Grid, Row, Col } from 'react-bootstrap';
 import Header from './shared/Header';
 
-class App extends React.Component {
+class EmptyLayout extends Component {
   render() {
     return (
       <div>
         <Header />
-        <div>
-          {this.props.children}
-        </div>
+        {this.props.children}
       </div>
     );
   }
 }
 
-App.propTypes = {
+EmptyLayout.propTypes = {
   children: PropTypes.object.isRequired
 };
 
-export default App;
+export default EmptyLayout;
