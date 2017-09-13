@@ -1,13 +1,31 @@
- .main {
-   background-color: #dee9fc;
-   min-height: 100%;
+.siteWrapper {
+  height: 100%;
+  min-width: 300px;
+  overflow-y: hidden;
+    
+  .main {
+    background-color: #dee9fc;
+    height: 100% !important;
+    min-height: 100% !important;
+    display: flex;
 
-  .sidebar {
-    padding: 0 !important;
-  }
+    .sidebar {
+      padding: 0 !important;
+      width: 250px;
+      position: static;
 
-  .content {
-    background-color: white;
-    border: 1px solid lightgrey
-  }
- } 
+      @media only screen and (max-width: 64em) {
+        display: none;
+      }
+    }
+
+    .content {
+      background-color: white;
+      width: 100%;
+      max-height: 100vh;
+      display: flex;
+      flex: auto;
+      overflow-y: auto;
+    }
+  } 
+}

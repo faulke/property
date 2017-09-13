@@ -2,32 +2,45 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
+import { isLoggedIn } from '../selectors';
+import * as actions from '../actions';
 import Header from './shared/Header';
 import Sidebar from './shared/Sidebar';
 import styles from './mainLayout.less';
 
 class MainLayout extends Component {
+  componentWillMount() {
+    if (!this.props.isAuthed) {
+      browserHistory.push('account/login');
+    }
+  }
+
   render() {
     return (
-      <div>
+      <div className={styles.siteWrapper}>
         <Header />
-        <Grid fluid>
-          <Row className={styles.main}>
-            <Col sm={2} className={styles.sidebar}>
-              <Sidebar />
-            </Col>
-            <Col sm={10} className={styles.content}>
-              {this.props.children}
-            </Col>
-          </Row>
-        </Grid>
+        <div className={styles.main}>
+          <aside className={styles.sidebar}>
+            <Sidebar />
+          </aside>
+          <div className={styles.content}>
+            {this.props.children}
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 MainLayout.propTypes = {
-  children: PropTypes.object.isRequired
+  children: PropTypes.object.isRequired,
+  isAuthed: React.PropTypes.bool.isRequired
 };
 
-export default MainLayout;
+const mapStateToProps = state => ({
+  isAuthed: isLoggedIn(state)
+});
+
+export default connect(mapStateToProps, actions)(MainLayout);
