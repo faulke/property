@@ -2,9 +2,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
+import { getAuth } from '../selectors';
+import * as actions from '../actions';
 import Header from './shared/Header';
 
 class EmptyLayout extends Component {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.name) {
+      browserHistory.push('/properties');
+    }
+  }
+
   render() {
     return (
       <div>
@@ -16,7 +26,16 @@ class EmptyLayout extends Component {
 }
 
 EmptyLayout.propTypes = {
-  children: PropTypes.object.isRequired
+  children: PropTypes.object.isRequired,
+  name: PropTypes.string
 };
 
-export default EmptyLayout;
+EmptyLayout.defaultProps = {
+  name: null
+};
+
+const mapStateToProps = state => ({
+  ...getAuth(state)
+});
+
+export default connect(mapStateToProps, actions)(EmptyLayout);
