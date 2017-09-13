@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { isLoggedIn, getAuth } from '../../selectors';
 import * as actions from '../../actions';
+import styles from './header.less';
 
 const Header = ({ ...props }) => (
-  <Navbar inverse>
+  <Navbar inverse className={styles.navbarMb0}>
     <Navbar.Header>
       <Navbar.Brand>
         Logo here
