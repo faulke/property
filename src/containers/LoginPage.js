@@ -13,6 +13,13 @@ class LoginPage extends FormTemplate {
     this.submitForm = this.submitForm.bind(this);
   }
 
+  componentWillMount() {
+    const { name, clearLocalUser } = this.props;
+    if (name) {
+      clearLocalUser();
+    }
+  }
+
   submitForm(evt) {
     evt.preventDefault();
     const { email, password } = this.props;
@@ -36,7 +43,8 @@ LoginPage.propTypes = {
   email: React.PropTypes.string,
   password: React.PropTypes.string,
   name: React.PropTypes.string,
-  login: React.PropTypes.func.isRequired
+  login: React.PropTypes.func.isRequired,
+  clearLocalUser: React.PropTypes.func.isRequired
 };
 
 LoginPage.defaultProps = {
