@@ -3,16 +3,29 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import styles from './sidebar.less';
 
 const Sidebar = ({ ...props }) => (
-  <menu>
-    <li>
-      <Link to="/properties">Properties</Link>
+  <ul className={styles.navList}>
+    <li className={styles.navItem}>
+      <Link 
+        to="/properties"
+        className={styles.link}
+        activeClassName={styles.active}
+      >
+        Properties
+      </Link>
     </li>
-    <li>
-      <Link to="/properties/add">Add Property</Link>
+    <li className={styles.navItem}>
+      <Link 
+        to="/properties/add"
+        className={styles.link}
+        activeClassName={styles.active}
+      >
+        Add Property
+      </Link>
     </li>
-  </menu>
+  </ul>
 );
 
 Sidebar.propTypes = {
