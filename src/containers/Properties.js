@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import querystring from 'query-string';
-import { Grid, Row } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import * as actions from '../actions/index';
 import { getProperties } from '../selectors';
 import PropertyItem from '../components/property/PropertyItem';
+import Sidebar from '../components/shared/Sidebar';
 import styles from './properties.less';
 
 class Properties extends Component {
@@ -25,24 +26,29 @@ class Properties extends Component {
   render() {
     const { properties } = this.props;
     return (
-      <div>
-        <Grid fluid>
-          <Link to="/properties/add">Add property</Link>
-          <Row className={styles.propertyRow}>
-            {
-              properties.map(x => (
-                <PropertyItem
-                  key={x.id} 
-                  address={x.address}
-                  city={x.city}
-                  state={x.state}
-                  zipcode={x.zipcode} 
-                />
-              ))
-            }
-          </Row>
-        </Grid>
-      </div>
+      <Grid fluid style={{ flex: "auto" }}>
+        <Row className={styles.pageHeader}>
+          <Col xs={7}>
+            <h1 className={styles.headerTitle}>Properties</h1>
+          </Col>
+          <Col xs={5} className={styles.headerRight}>
+            <Link to="/properties/add" className={`btn btn-primary ${styles.addProperty}`}>Add property</Link>
+          </Col>
+        </Row>
+        <Row className={styles.propertyRow}>
+          {
+            properties.map(x => (
+              <PropertyItem
+                key={x.id}
+                address={x.address}
+                city={x.city}
+                state={x.state}
+                zipcode={x.zipcode}
+              />
+            ))
+          }
+        </Row>
+      </Grid>
     );
   }
 }

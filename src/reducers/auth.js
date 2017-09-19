@@ -19,7 +19,6 @@ export const auth = (state = initialState, action) => {
     case actions.GET_AUTH_SUCCESS:
       localStorage.setItem('jwt', payload.token);
       localStorage.setItem('user', payload.user);
-      browserHistory.push('/properties');
       return { ...state, name: payload.user };
     case actions.GET_AUTH_FAILURE:
       browserHistory.push('/account/login');
