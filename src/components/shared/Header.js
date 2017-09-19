@@ -7,7 +7,7 @@ import * as actions from '../../actions';
 import styles from './header.less';
 
 const Header = ({ ...props }) => (
-  <Navbar inverse className={styles.navbarMb0}>
+  <Navbar inverse collapseOnSelect className={styles.navbarMb0}>
     <Navbar.Header>
       <Navbar.Brand>
         Logo here
@@ -23,6 +23,7 @@ const Header = ({ ...props }) => (
             </NavDropdown> :
             <NavItem>Sign In</NavItem>
         }
+        <NavItem className="visible-xs" href="/properties">Properties</NavItem>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
