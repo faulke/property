@@ -18,11 +18,29 @@ const Sidebar = ({ ...props }) => (
     </li>
     <li className={styles.navItem}>
       <Link 
-        to="/properties/add"
+        to="/2"
         className={styles.link}
         activeClassName={styles.active}
       >
-        Add Property
+        Page 2
+      </Link>
+    </li>
+    <li className={styles.navItem}>
+      <Link 
+        to="/3"
+        className={styles.link}
+        activeClassName={styles.active}
+      >
+        Page 3
+      </Link>
+    </li>
+    <li className={styles.navItem}>
+      <Link 
+        to="/4"
+        className={styles.link}
+        activeClassName={styles.active}
+      >
+        Page 4
       </Link>
     </li>
   </ul>
