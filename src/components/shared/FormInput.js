@@ -11,10 +11,10 @@ const FormInput = ({
   className
 }) => (
   <FormGroup controlId={name}>
-    <Col componentClass={ControlLabel} sm={3}>
+    <Col componentClass={ControlLabel} sm={4}>
       {label}
     </Col>
-    <Col sm={6}>
+    <Col sm={4}>
       <input type={type} className={className} placeholder={placeholder} {...input} />
     </Col>
   </FormGroup>

@@ -25,7 +25,7 @@ const RegisterForm = ({ handleSubmit, pristine, isPosting }) => (
       required
     />
     <FormGroup>
-      <Col smOffset={3} sm={6}>
+      <Col smOffset={4} sm={4}>
         <Button type="submit" disabled={pristine || isPosting}>
           Sign in
         </Button>

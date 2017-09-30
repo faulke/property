@@ -53,7 +53,7 @@ const AddPropertyForm = ({ isPosting, handleSubmit, pristine }) => (
       required
     />
     <FormGroup>
-      <Col smOffset={3} sm={4}>
+      <Col smOffset={4} sm={4}>
         <Button type="submit" disabled={pristine || isPosting}>
           Add property
         </Button>
