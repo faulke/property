@@ -8,6 +8,7 @@ import * as actions from '../actions/index';
 import { getProperties } from '../selectors';
 import PropertyItem from '../components/property/PropertyItem';
 import Sidebar from '../components/shared/Sidebar';
+import Loader from '../components/shared/Loader';
 import styles from './properties.less';
 
 class Properties extends Component {
@@ -24,36 +25,39 @@ class Properties extends Component {
   }
 
   render() {
-    const { properties } = this.props;
+    const { isFetching, properties } = this.props;
     return (
-      <Grid fluid style={{ flex: "auto" }}>
-        <Row className={styles.pageHeader}>
-          <Col xs={7}>
-            <h1 className={styles.headerTitle}>Properties</h1>
-          </Col>
-          <Col xs={5} className={styles.headerRight}>
-            <Link to="/properties/add" className={`btn btn-primary ${styles.addProperty}`}>Add property</Link>
-          </Col>
-        </Row>
-        <Row className={styles.propertyRow}>
-          {
-            properties.map(x => (
-              <PropertyItem
-                key={x.id}
-                address={x.address}
-                city={x.city}
-                state={x.state}
-                zipcode={x.zipcode}
-              />
-            ))
-          }
-        </Row>
-      </Grid>
+      isFetching ? 
+        <Loader /> :
+        <Grid fluid style={{ flex: "auto" }}>
+          <Row className={styles.pageHeader}>
+            <Col xs={7}>
+              <h1 className={styles.headerTitle}>Properties</h1>
+            </Col>
+            <Col xs={5} className={styles.headerRight}>
+              <Link to="properties/add" className={`btn btn-primary ${styles.addProperty}`}>Add property</Link>
+            </Col>
+          </Row>
+          <Row className={styles.propertyRow}>
+            {
+              properties.map(x => (
+                <PropertyItem
+                  key={x.id}
+                  address={x.address}
+                  city={x.city}
+                  state={x.state}
+                  zipcode={x.zipcode}
+                />
+              ))
+            }
+          </Row>
+        </Grid>
     );
   }
 }
 
 Properties.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
   fetchProperties: PropTypes.func.isRequired,
   properties: PropTypes.array.isRequired,
   location: PropTypes.object
