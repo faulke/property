@@ -1,43 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Field, reduxForm } from 'redux-form';
 import { Form, FormControl, FormGroup, ControlLabel, Col, Button } from 'react-bootstrap';
+import FormInput from '../shared/FormInput';
 
-const RegisterForm = ({ submitForm, updateForm, email, password }) => (
-  <Form horizontal onSubmit={submitForm}>
-    <FormGroup controlId="email">
-      <Col componentClass={ControlLabel} sm={3}>
-        Email
-      </Col>
-      <Col sm={6}>
-        <FormControl
-          type="text" 
-          name="email"
-          placeholder="Email" 
-          value={email} 
-          onChange={updateForm} 
-        />
-      </Col>
-    </FormGroup>
-
-    <FormGroup controlId="password">
-      <Col componentClass={ControlLabel} sm={3}>
-        Password
-      </Col>
-      <Col sm={6}>
-        <FormControl
-          type="password" 
-          name="password"
-          placeholder="Password" 
-          value={password} 
-          onChange={updateForm} 
-        />
-      </Col>
-    </FormGroup>
-
+const RegisterForm = ({ handleSubmit, pristine }) => (
+  <Form horizontal onSubmit={handleSubmit}>
+    <Field
+      type="text"
+      name="email"
+      label="Email"
+      placeholder="Email"
+      component={FormInput}
+      className="form-control"
+      required
+    />
+    <Field
+      type="password"
+      name="password"
+      label="Password"
+      placeholder="Password"
+      component={FormInput}
+      className="form-control"
+      required
+    />
     <FormGroup>
       <Col smOffset={3} sm={6}>
         <Button type="submit">
-          Register
+          Sign in
         </Button>
       </Col>
     </FormGroup>
@@ -45,15 +35,10 @@ const RegisterForm = ({ submitForm, updateForm, email, password }) => (
 );
 
 RegisterForm.propTypes = {
-  email: React.PropTypes.string,
-  password: React.PropTypes.string,
-  updateForm: React.PropTypes.func.isRequired,
-  submitForm: React.PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired
 };
 
-RegisterForm.defaultProps = {
-  email: '',
-  password: ''
-};
-
-export default RegisterForm;
+export default reduxForm({
+  form: 'login'
+})(RegisterForm);
