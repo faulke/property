@@ -11,13 +11,15 @@ export default (
   <Router>
     <Route path="/" component={MainLayout}>
       <IndexRoute component={Properties} />
-      <Route path="properties" component={Properties} />
-      <Route path="properties/add" component={AddPropertyPage} />
+      <Route path="/properties">
+        <IndexRoute component={Properties} />
+        <Route path="/properties/add" component={AddPropertyPage} />
+      </Route>
     </Route>
     <Route component={EmptyLayout}>
       <IndexRoute component={LoginPage} />
-      <Route path="account/register" component={RegisterPage} />
-      <Route path="account/login" component={LoginPage} />
+      <Route path="/account/register" component={RegisterPage} />
+      <Route path="/account/login" component={LoginPage} />
     </Route>
   </Router>
 );
