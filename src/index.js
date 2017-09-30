@@ -7,7 +7,10 @@ import routes from './routes';
 import registerServiceWorker from './registerServiceWorker';
 
 const store = configureStore({
-  auth: { name: localStorage.getItem('name'), isPosting: false } 
+  auth: { 
+    name: localStorage.getItem('name'), 
+    isPosting: false, 
+    isLoggedIn: localStorage.getItem('jwt') !== null } 
 });
 
 render(
