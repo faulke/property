@@ -13,13 +13,6 @@ class LoginPage extends FormTemplate {
     this.submitForm = this.submitForm.bind(this);
   }
 
-  componentWillMount() {
-    const { name, clearLocalUser } = this.props;
-    if (name) {
-      clearLocalUser();
-    }
-  }
-
   submitForm(evt) {
     evt.preventDefault();
     const { email, password } = this.props;

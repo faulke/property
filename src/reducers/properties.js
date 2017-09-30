@@ -12,7 +12,6 @@ export const properties = (state = initialState, { type, payload }) => {
     case actions.GET_PROPERTIES_SUCCESS:
       return { ...state, properties: payload };
     case actions.GET_PROPERTIES_FAILURE:
-      browserHistory.push('account/login');
       return { ...state };
     default:
       return { ...state };

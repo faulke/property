@@ -9,6 +9,11 @@ import * as actions from '../actions';
 import Header from './shared/Header';
 
 class EmptyLayout extends Component {
+  componentWillMount() {
+    localStorage.removeItem('name');
+    localStorage.removeItem('jwt');
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.name) {
       browserHistory.push('/properties');
