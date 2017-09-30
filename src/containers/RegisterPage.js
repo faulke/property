@@ -27,15 +27,16 @@ class RegisterPage extends Component {
   }
 
   render() {
-    const { email, password } = this.props;
+    const { isPosting } = this.props;
     return (
-      <RegisterForm onSubmit={this.submit} />
+      <RegisterForm onSubmit={this.submit} isPosting={isPosting} />
     );
   }
 }
 
 RegisterPage.propTypes = {
   register: PropTypes.func.isRequired,
+  isPosting: PropTypes.bool.isRequired,
   isAuthed: PropTypes.bool.isRequired
 };
 
