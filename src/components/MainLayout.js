@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { isLoggedIn } from '../selectors';
+import { isLoggedIn, getAuth } from '../selectors';
 import * as actions from '../actions';
 import Header from './shared/Header';
 import Sidebar from './shared/Sidebar';
@@ -17,10 +17,16 @@ class MainLayout extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.isAuthed) {
+      browserHistory.push('account/login');
+    }
+  }
+
   render() {
     return (
       <div className={styles.siteWrapper}>
-        <Header />
+        <Header logout={this.props.logout} />
         <div className={styles.main}>
           <aside className={styles.sidebar}>
             <Sidebar />
@@ -36,11 +42,13 @@ class MainLayout extends Component {
 
 MainLayout.propTypes = {
   children: PropTypes.object.isRequired,
-  isAuthed: React.PropTypes.bool.isRequired
+  isAuthed: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  isAuthed: isLoggedIn(state)
+  isAuthed: isLoggedIn(state),
+  ...getAuth(state)
 });
 
 export default connect(mapStateToProps, actions)(MainLayout);

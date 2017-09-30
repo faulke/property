@@ -10,14 +10,7 @@ import Header from './shared/Header';
 
 class EmptyLayout extends Component {
   componentWillMount() {
-    localStorage.removeItem('name');
-    localStorage.removeItem('jwt');
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.name) {
-      browserHistory.push('/properties');
-    }
+    this.props.logout();
   }
 
   render() {
@@ -32,11 +25,7 @@ class EmptyLayout extends Component {
 
 EmptyLayout.propTypes = {
   children: PropTypes.object.isRequired,
-  name: PropTypes.string
-};
-
-EmptyLayout.defaultProps = {
-  name: null
+  logout: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

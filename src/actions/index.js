@@ -90,7 +90,7 @@ export const createProperty = ({ address, city, state, zipcode, rent }) => ({
   }
 });
 
-export const CLEAR_LOCAL_USER = 'CLEAR_LOCAL_USER';
-export const clearLocalUser = () => ({
-  type: CLEAR_LOCAL_USER
+export const LOGOUT = 'LOGOUT';
+export const logout = () => ({
+  type: LOGOUT
 });
