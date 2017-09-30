@@ -13,13 +13,13 @@ import styles from './mainLayout.less';
 class MainLayout extends Component {
   componentWillMount() {
     if (!this.props.isAuthed) {
-      browserHistory.push('account/login');
+      browserHistory.push('/account/login');
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.isAuthed) {
-      browserHistory.push('account/login');
+      browserHistory.push('/account/login');
     }
   }
 

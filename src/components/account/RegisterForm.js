@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Form, FormControl, FormGroup, ControlLabel, Col, Button } from 'react-bootstrap';
 import FormInput from '../shared/FormInput';
 
-const RegisterForm = ({ handleSubmit, pristine }) => (
+const RegisterForm = ({ handleSubmit, pristine, isPosting }) => (
   <Form horizontal onSubmit={handleSubmit}>
     <Field
       type="text"
@@ -26,7 +26,7 @@ const RegisterForm = ({ handleSubmit, pristine }) => (
     />
     <FormGroup>
       <Col smOffset={3} sm={6}>
-        <Button type="submit">
+        <Button type="submit" disabled={pristine || isPosting}>
           Sign in
         </Button>
       </Col>
@@ -36,7 +36,8 @@ const RegisterForm = ({ handleSubmit, pristine }) => (
 
 RegisterForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired
+  pristine: PropTypes.bool.isRequired,
+  isPosting: PropTypes.bool.isRequired
 };
 
 export default reduxForm({

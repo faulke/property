@@ -2,7 +2,8 @@ import * as actions from '../actions';
 
 export const initialState = {
   name: null,
-  isPosting: false
+  isPosting: false,
+  isLoggedIn: false
 };
 
 const clearLocalUser = () => {
@@ -19,13 +20,13 @@ export const auth = (state = initialState, action) => {
     case actions.GET_AUTH_SUCCESS:
       localStorage.setItem('jwt', payload.token);
       localStorage.setItem('name', payload.user);
-      return { ...state, name: payload.user, isPosting: false };
+      return { ...state, name: payload.user, isPosting: false, isLoggedIn: true };
     case actions.GET_AUTH_FAILURE:
       clearLocalUser();
       return { ...state, name: null, isPosting: false };
     case actions.LOGOUT:
       clearLocalUser();
-      return { ...state, name: null };
+      return { ...state, name: null, isLoggedIn: false };
     default:
       return { ...state };
   }
