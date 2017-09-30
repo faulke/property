@@ -20,6 +20,7 @@ class AddPropertyPage extends Component {
   }
 
   render() {
+    const { isPosting } = this.props;
     return (
       <Grid fluid style={{ flex: "auto" }}>
         <Row className={styles.pageHeader}>
@@ -29,7 +30,7 @@ class AddPropertyPage extends Component {
         </Row>
         <Row>
           <Col sm={12}>
-            <AddPropertyForm onSubmit={this.submit} />
+            <AddPropertyForm isPosting={isPosting} onSubmit={this.submit} />
           </Col>
         </Row>
       </Grid>
@@ -38,7 +39,8 @@ class AddPropertyPage extends Component {
 }
 
 AddPropertyPage.propTypes = {
-  createProperty: React.PropTypes.func.isRequired
+  createProperty: PropTypes.func.isRequired,
+  isPosting: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
