@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { browserHistory } from 'react-router';
 import { isLoggedIn, getAuth } from '../../selectors';
 import * as actions from '../../actions';
 import styles from './header.less';
 
-const Header = ({ ...props }) => (
-  <Navbar inverse collapseOnSelect className={styles.navbarMb0}>
+const Header = ({ name, logout, isAuthed }) => (
+  <Navbar inverse collapseOnSelect className={styles.navbarMb0}> 
     <Navbar.Header>
       <Navbar.Brand>
         Logo here
@@ -17,13 +18,16 @@ const Header = ({ ...props }) => (
     <Navbar.Collapse>
       <Nav pullRight>
         {
-          props.isAuthed ? 
-            <NavDropdown id="user-dropdown" title={props.name}>
-              <MenuItem href="/account/login" onClick={props.clearLocalUser}>Log out</MenuItem>
+          isAuthed ? 
+            <NavDropdown id="user-dropdown" title={name}>
+              <MenuItem onClick={logout}>Log out</MenuItem>
             </NavDropdown> :
             <NavItem>Sign In</NavItem>
         }
-        <NavItem className="visible-xs" href="/properties">Properties</NavItem>
+        <NavItem 
+          className="visible-xs"
+          onClick={() => browserHistory.push('properties')}
+        >Properties</NavItem>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
@@ -32,11 +36,12 @@ const Header = ({ ...props }) => (
 Header.propTypes = {
   name: React.PropTypes.string,
   isAuthed: React.PropTypes.bool.isRequired,
-  clearLocalUser: React.PropTypes.func.isRequired
+  logout: PropTypes.func
 };
 
 Header.defaultProps = {
-  name: null
+  name: null,
+  logout: null
 };
 
 const mapStateToProps = state => ({
