@@ -1,13 +1,6 @@
 import { CALL_API } from 'redux-api-middleware';
 import querystring from 'query-string';
 
-export const UPDATE_INPUT = 'UPDATE_INPUT';
-export const updateInput = (name, value) => ({
-  type: UPDATE_INPUT,
-  source: name,
-  value
-});
-
 const ACCEPT_JSON_HEADERS = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
@@ -77,7 +70,7 @@ export const CREATE_PROPERTY_REQUEST = 'CREATE_PROPERTY_REQUEST';
 export const CREATE_PROPERTY_SUCCESS = 'CREATE_PROPERTY_SUCCESS';
 export const CREATE_PROPERTY_FAILURE = 'CREATE_PROPERTY_FAILURE';
 
-export const createProperty = (address, city, state, zipcode, rent) => ({
+export const createProperty = ({ address, city, state, zipcode, rent }) => ({
   [CALL_API]: {
     endpoint: `/api/properties/add`,
     method: 'POST',
