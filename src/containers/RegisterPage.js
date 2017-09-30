@@ -10,49 +10,24 @@ class RegisterPage extends FormTemplate {
   constructor(props) {
     super(props);
 
-    this.submitForm = this.submitForm.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
-  componentWillMount() {
-    const { name, clearLocalUser } = this.props;
-    if (name) {
-      clearLocalUser();
-    }
-  }
-
-  submitForm(evt) {
-    evt.preventDefault();
-    const email = this.props.email;
-    const password = this.props.password;
+  submit(values) {
+    const { email, password } = values;
     this.props.register(email, password);
   }
 
   render() {
     const { email, password } = this.props;
     return (
-      <div>
-        <RegisterForm
-          submitForm={this.submitForm}
-          updateForm={this.updateInput}
-          email={email}
-          password={password}
-        />
-      </div>
+      <RegisterForm onSubmit={this.submit} />
     );
   }
 }
 
 RegisterPage.propTypes = {
-  email: React.PropTypes.string,
-  password: React.PropTypes.string,
-  register: React.PropTypes.func.isRequired,
-  clearLocalUser: React.PropTypes.func.isRequired
-};
-
-RegisterPage.defaultProps = {
-  email: '',
-  password: '',
-  name: null
+  register: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

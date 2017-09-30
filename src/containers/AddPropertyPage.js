@@ -1,40 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { browserHistory } from 'react-router';
 import { Grid, Row, Col } from 'react-bootstrap';
-import FormTemplate from './shared/FormTemplate';
 import * as actions from '../actions/index';
 import AddPropertyForm from '../components/property/AddPropertyForm';
 import { createProperty } from '../selectors';
+import styles from './properties.less';
 
-class AddPropertyPage extends FormTemplate {
+class AddPropertyPage extends Component {
   constructor(props) {
     super(props);
 
-    this.submitForm = this.submitForm.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
-  submitForm(evt) {
-    evt.preventDefault();
-    const { address, city, state, zipcode, rent } = this.props;
-    this.props.createProperty(address, city, state, zipcode, rent);
+  submit(values) {
+    this.props.createProperty(values);
   }
 
   render() {
-    const { address, city, state, zipcode, rent } = this.props;
     return (
       <Grid fluid style={{ flex: "auto" }}>
+        <Row className={styles.pageHeader}>
+          <Col xs={7}>
+            <h1 className={styles.headerTitle}>Add Property</h1>
+          </Col>
+        </Row>
         <Row>
           <Col sm={12}>
-            <AddPropertyForm
-              submitForm={this.submitForm}
-              updateForm={this.updateInput}
-              address={address}
-              city={city}
-              state={state}
-              zipcode={zipcode}
-              rent={rent}
-            />
+            <AddPropertyForm onSubmit={this.submit} />
           </Col>
         </Row>
       </Grid>
@@ -44,14 +39,6 @@ class AddPropertyPage extends FormTemplate {
 
 AddPropertyPage.propTypes = {
   createProperty: React.PropTypes.func.isRequired
-};
-
-AddPropertyPage.defaultProps = {
-  address: '',
-  city: '',
-  state: '',
-  zipcode: '',
-  rent: ''
 };
 
 const mapStateToProps = state => ({
