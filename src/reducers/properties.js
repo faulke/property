@@ -2,17 +2,18 @@ import { browserHistory } from 'react-router';
 import * as actions from '../actions';
 
 export const initialState = {
+  isFetching: false,
   properties: []
 };
 
 export const properties = (state = initialState, { type, payload }) => {
   switch (type) {
     case actions.GET_PROPERTIES_REQUEST:
-      return { ...state };
+      return { ...state, isFetching: true };
     case actions.GET_PROPERTIES_SUCCESS:
-      return { ...state, properties: payload };
+      return { ...state, properties: payload, isFetching: false };
     case actions.GET_PROPERTIES_FAILURE:
-      return { ...state };
+      return { ...state, isFetching: false };
     default:
       return { ...state };
   }
