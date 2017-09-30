@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Form, FormControl, FormGroup, ControlLabel, Col, Button } from 'react-bootstrap';
 import FormInput from '../shared/FormInput';
 
-const AddPropertyForm = ({ handleSubmit, pristine }) => (
+const AddPropertyForm = ({ isPosting, handleSubmit, pristine }) => (
   <Form horizontal onSubmit={handleSubmit}>
     <Field
       type="text"
@@ -54,7 +54,7 @@ const AddPropertyForm = ({ handleSubmit, pristine }) => (
     />
     <FormGroup>
       <Col smOffset={3} sm={4}>
-        <Button type="submit" disabled={pristine}>
+        <Button type="submit" disabled={pristine || isPosting}>
           Add property
         </Button>
       </Col>
@@ -64,7 +64,8 @@ const AddPropertyForm = ({ handleSubmit, pristine }) => (
 
 AddPropertyForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired
+  pristine: PropTypes.bool.isRequired,
+  isPosting: PropTypes.bool.isRequired
 };
 
 export default reduxForm({

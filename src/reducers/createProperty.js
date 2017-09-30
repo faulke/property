@@ -1,20 +1,16 @@
 import * as actions from '../actions';
 
 export const initialState = {
-  address: '',
-  city: '',
-  state: '',
-  zipcode: '',
-  rent: ''
+  isPosting: false
 };
 
 export const create = (state = initialState, action) => {
-  const { type, payload, source, value } = action;
+  const { type, payload } = action;
   switch (type) {
     case actions.CREATE_PROPERTY_REQUEST:
-      return { ...state };
+      return { ...state, isPosting: true };
     case actions.CREATE_PROPERTY_SUCCESS:
-      return { ...state };
+      return { ...state, isPosting: false };
     default:
       return { ...state };
   }
