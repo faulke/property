@@ -1,14 +1,9 @@
 import { CALL_API } from 'redux-api-middleware';
 import querystring from 'query-string';
 
-const ACCEPT_JSON_HEADERS = {
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-};
-
 const headers = () => ({
-  ...ACCEPT_JSON_HEADERS,
-  Authorization: `Bearer ${localStorage.getItem('jwt')}`
+  Accept: 'application/json',
+  'Content-Type': 'application/json'
 });
 
 export const GET_AUTH_REQUEST = 'GET_AUTH_REQUEST';
