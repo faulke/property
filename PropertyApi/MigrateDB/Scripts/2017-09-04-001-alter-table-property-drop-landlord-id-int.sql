@@ -1,0 +1,1 @@
+alter table property drop landlord_id
