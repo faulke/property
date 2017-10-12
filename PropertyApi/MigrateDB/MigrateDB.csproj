@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <StartupObject>MigrateDB.Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\2017-10-01-002-drop-table-jwt.sql" />
+    <None Remove="Scripts\2017-10-01-003-create-table-jwt-2.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\2017-03-07-001-create-table-property.sql" />
+    <EmbeddedResource Include="Scripts\2017-03-07-002-seed-table-property.sql" />
+    <EmbeddedResource Include="Scripts\2017-09-01-001-alter-table-property-add-landlord.sql" />
+    <EmbeddedResource Include="Scripts\2017-09-04-001-alter-table-property-drop-landlord-id-int.sql" />
+    <EmbeddedResource Include="Scripts\2017-10-01-001-create-table-jwt.sql" />
+    <EmbeddedResource Include="Scripts\2017-10-01-002-drop-table-jwt.sql" />
+    <EmbeddedResource Include="Scripts\2017-10-01-003-create-table-jwt-2.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup-postgresql" Version="3.3.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PropertyApi\PropertyApi.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "MigrateDB": {
+      "commandName": "Project"
+    }
+  }
+}
