@@ -27,14 +27,23 @@ export const login = (email, password) => ({
   }
 });
 
-export const register = (email, password) => ({
+export const register = ({
+  firstName,
+  lastName,
+  email, 
+  password, 
+  confirmPassword
+}) => ({
   [CALL_API]: {
     endpoint: `/api/account/register`,
     method: 'POST',
     headers,
     body: JSON.stringify({
+      firstName,
+      lastName,
       email,
-      password
+      password,
+      confirmPassword
     }),
     types: [
       'GET_AUTH_REQUEST',
