@@ -40,6 +40,7 @@
     "no-param-reassign": 0,
     "import/prefer-default-export": 0,
     "import/no-unresolved": [1, { "caseSensitive": false }],
-    "import/extensions": 0
+    "import/extensions": 0,
+    "no-confusing-arrow": 0
   }
 }

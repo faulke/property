@@ -1,13 +1,23 @@
 .formGroup {
   margin-left: auto !important;
   margin-right: auto !important;
-}
 
-.helpLink {
-  float: right;
-  text-align: right;
+  .helpLink {
+    float: right;
+    text-align: right;
+  
+    @media only screen and (min-width: 768px) {
+      padding-top: 7px;
+    }
+  }
 
-  @media only screen and (min-width: 768px) {
-    padding-top: 7px;
+  .formHint {
+    color: gray;
+    display: block;
+    font-size: 10px;
+  }
+
+  .error {
+    color: red;
   }
 }

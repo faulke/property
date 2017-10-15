@@ -5,16 +5,18 @@ import { Form, FormControl, FormGroup, ControlLabel, Col, Row, Button } from 're
 import FormInput from '../shared/FormInput';
 import styles from './forms.less';
 
+const required = value => value ? undefined : 'Required';
+
 const LoginForm = ({ handleSubmit, pristine, isPosting, loginError }) => (
   <Form horizontal className={styles.form} onSubmit={handleSubmit}>
     <Field
-      type="text"
+      type="email"
       name="email"
       label="Email"
       placeholder="Email"
       component={FormInput}
       className="form-control"
-      required
+      validate={[required]}
     />
     <Field
       type="password"
@@ -24,7 +26,7 @@ const LoginForm = ({ handleSubmit, pristine, isPosting, loginError }) => (
       placeholder="Password"
       component={FormInput}
       className="form-control"
-      required
+      validate={[required]}
     />
     {
       loginError ?

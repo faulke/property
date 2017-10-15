@@ -22,12 +22,18 @@ const Header = ({ name, logout, isAuthed }) => (
             <NavDropdown id="user-dropdown" title={name}>
               <MenuItem onClick={logout}>Log out</MenuItem>
             </NavDropdown> :
-            <NavItem>Sign In</NavItem>
+            <NavItem 
+              onClick={() => browserHistory.push('/account/login')}
+            >Sign In</NavItem>
         }
-        <NavItem 
-          className="visible-xs"
-          onClick={() => browserHistory.push('properties')}
-        >Properties</NavItem>
+        {
+          isAuthed ?
+            <NavItem 
+              className="visible-xs"
+              onClick={() => browserHistory.push('properties')}
+            >Properties</NavItem> :
+            ''
+        }
       </Nav>
     </Navbar.Collapse>
   </Navbar>

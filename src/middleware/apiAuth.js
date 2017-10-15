@@ -1,4 +1,4 @@
-import { isRSAA, CALL_API } from 'redux-api-middleware';
+import { isRSAA, CALL_API, getJSON } from 'redux-api-middleware';
 import { browserHistory } from 'react-router';
 
 export default store => next => action => {
@@ -33,11 +33,13 @@ export default store => next => action => {
       },
       {
         type: actionCopy.types[2],
-        meta: () => {
-          // for now, assume only 401 on failure
-          localStorage.removeItem('jwt');
-          browserHistory.push('/account/login');
-        }
+        meta: (act, state, res) => {
+          if (res.status === 401) {
+            localStorage.removeItem('jwt');
+            browserHistory.push('/account/login');
+          }
+        },
+        payload: (act, state, res) => getJSON(res).then(json => json)
       }
     ];
 
