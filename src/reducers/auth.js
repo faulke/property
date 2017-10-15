@@ -3,7 +3,8 @@ import * as actions from '../actions';
 export const initialState = {
   name: null,
   isPosting: false,
-  isLoggedIn: false
+  isLoggedIn: false,
+  loginError: null
 };
 
 const clearLocalUser = () => {
@@ -16,14 +17,14 @@ export const auth = (state = initialState, action) => {
   switch (type) {
     case actions.GET_AUTH_REQUEST:
       clearLocalUser();
-      return { ...state, name: null, isPosting: true };
+      return { ...state, name: null, isPosting: true, loginError: null };
     case actions.GET_AUTH_SUCCESS:
       localStorage.setItem('jwt', payload.token);
       localStorage.setItem('name', payload.user);
       return { ...state, name: payload.user, isPosting: false, isLoggedIn: true };
     case actions.GET_AUTH_FAILURE:
       clearLocalUser();
-      return { ...state, name: null, isPosting: false };
+      return { ...state, name: null, isPosting: false, loginError: 'Email or password is invalid.' };
     case actions.LOGOUT:
       clearLocalUser();
       return { ...state, name: null, isLoggedIn: false };
