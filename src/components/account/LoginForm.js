@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
-import { Form, FormControl, FormGroup, ControlLabel, Col, Button } from 'react-bootstrap';
+import { Form, FormControl, FormGroup, ControlLabel, Col, Row, Button } from 'react-bootstrap';
 import FormInput from '../shared/FormInput';
+import styles from './forms.less';
 
-const LoginForm = ({ handleSubmit, pristine, isPosting }) => (
-  <Form horizontal onSubmit={handleSubmit}>
+const LoginForm = ({ handleSubmit, pristine, isPosting, loginError }) => (
+  <Form horizontal className={styles.form} onSubmit={handleSubmit}>
     <Field
       type="text"
       name="email"
@@ -19,14 +20,25 @@ const LoginForm = ({ handleSubmit, pristine, isPosting }) => (
       type="password"
       name="password"
       label="Password"
+      helpLink={{ route: "/account/login", text: "Forgot?" }}
       placeholder="Password"
       component={FormInput}
       className="form-control"
       required
     />
-    <FormGroup>
-      <Col smOffset={4} sm={4}>
-        <Button type="submit" disabled={pristine || isPosting}>
+    {
+      loginError ?
+        <p className={styles.error}>{loginError}</p> :
+        ''
+    }
+    <FormGroup className={styles.formGroup}>
+      <Col>
+        <Button
+          type="submit"
+          bsStyle={"success"}
+          className={styles.button}
+          disabled={isPosting}
+        >
           Sign in
         </Button>
       </Col>
@@ -37,7 +49,12 @@ const LoginForm = ({ handleSubmit, pristine, isPosting }) => (
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
-  isPosting: PropTypes.bool.isRequired
+  isPosting: PropTypes.bool.isRequired,
+  loginError: PropTypes.string
+};
+
+LoginForm.defaultProps = {
+  loginError: null
 };
 
 export default reduxForm({
