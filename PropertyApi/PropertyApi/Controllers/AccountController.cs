@@ -38,17 +38,23 @@ namespace PropertyApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody]Register creds)
         {
-            var user = new ApplicationUser { UserName = creds.Email, Email = creds.Email };
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = new ApplicationUser { FirstName = creds.FirstName, LastName = creds.LastName, UserName = creds.Email, Email = creds.Email };
             var result = await _userManager.CreateAsync(user, creds.Password);
-            var userClaims = await _userManager.GetClaimsAsync(user);
 
             if (result.Succeeded)
             {
                 var token = _jwt.Create(user.Id);
 
-                return Ok(new { user = user.Email, token = new JwtSecurityTokenHandler().WriteToken(token) });
+                return Ok(new { user = user.FullName, token = new JwtSecurityTokenHandler().WriteToken(token) });
             }
-            return BadRequest("Could not create token.");
+
+            if (result.Errors.Any())
+                return BadRequest(new { errors = result.Errors });
+
+            return BadRequest();
         }
 
         // POST api/account/login
@@ -57,17 +63,21 @@ namespace PropertyApi.Controllers
         {
             var user = await _userManager.FindByEmailAsync(login.Email);
 
-            if (user != null)
+            if (user == null)
+                return BadRequest(new { error = "User does not exist with that email." });
+
+            else
             {
                 var result = await _signInManager.PasswordSignInAsync(user.Email, login.Password, false, false);
                 if (result.Succeeded)
                 {
                     var token = _jwt.Create(user.Id);
 
-                    return Ok(new { user = user.Email, token = new JwtSecurityTokenHandler().WriteToken(token) });
+                    return Ok(new { user = user.FullName, token = new JwtSecurityTokenHandler().WriteToken(token) });
                 }
+                return Unauthorized();
             }
-            return Unauthorized();
+            
         }
     }
 }
