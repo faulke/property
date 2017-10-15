@@ -7,6 +7,7 @@ import { browserHistory } from 'react-router';
 import { getAuth } from '../selectors';
 import * as actions from '../actions';
 import Header from './shared/Header';
+import styles from './emptyLayout.less';
 
 class EmptyLayout extends Component {
   componentWillMount() {
@@ -15,7 +16,7 @@ class EmptyLayout extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.body}>
         <Header />
         {this.props.children}
       </div>
