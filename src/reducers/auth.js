@@ -4,7 +4,8 @@ export const initialState = {
   name: null,
   isPosting: false,
   isLoggedIn: false,
-  loginError: null
+  loginError: null,
+  registerError: null
 };
 
 const clearLocalUser = () => {
@@ -24,6 +25,9 @@ export const auth = (state = initialState, action) => {
       return { ...state, name: payload.user, isPosting: false, isLoggedIn: true };
     case actions.GET_AUTH_FAILURE:
       clearLocalUser();
+      if (payload && payload.errors) {
+        return { ...state, isPosting: false, registerError: payload.errors[0].description };
+      }
       return { ...state, name: null, isPosting: false, loginError: 'Email or password is invalid.' };
     case actions.LOGOUT:
       clearLocalUser();
