@@ -9,6 +9,7 @@ import { getProperties } from '../selectors';
 import PropertyItem from '../components/property/PropertyItem';
 import Sidebar from '../components/shared/Sidebar';
 import Loader from '../components/shared/Loader';
+import PageHeader from '../components/shared/PageHeader';
 import styles from './properties.less';
 
 class Properties extends Component {
@@ -30,14 +31,12 @@ class Properties extends Component {
       isFetching ? 
         <Loader /> :
         <Grid fluid style={{ flex: "auto" }}>
-          <Row className={styles.pageHeader}>
-            <Col xs={7}>
-              <h1 className={styles.headerTitle}>Properties</h1>
-            </Col>
-            <Col xs={5} className={styles.headerRight}>
-              <Link to="properties/add" className={`btn btn-primary ${styles.addProperty}`}>Add property</Link>
-            </Col>
-          </Row>
+          <PageHeader
+            title={"Properties"}
+            btnStyle={`btn btn-success ${styles.addProperty}`}
+            btnLink={"properties/add"}
+            btnTitle={"Add property"}
+          />
           <Row className={styles.propertyRow}>
             {
               properties.map(x => (

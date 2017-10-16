@@ -6,7 +6,8 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import * as actions from '../actions/index';
 import AddPropertyForm from '../components/property/AddPropertyForm';
 import { createProperty } from '../selectors';
-import styles from './properties.less';
+import PageHeader from '../components/shared/PageHeader.js';
+import styles from './addProperty.less';
 
 class AddPropertyPage extends Component {
   constructor(props) {
@@ -23,11 +24,12 @@ class AddPropertyPage extends Component {
     const { isPosting } = this.props;
     return (
       <Grid fluid style={{ flex: "auto" }}>
-        <Row className={styles.pageHeader}>
-          <Col xs={7}>
-            <h1 className={styles.headerTitle}>Add Property</h1>
-          </Col>
-        </Row>
+        <PageHeader
+          title={"Add Property"}
+          btnStyle={`btn btn-default`}
+          btnLink={"/properties"}
+          btnTitle={<div><i className={styles.left} /> All properties</div>}
+        />
         <Row>
           <Col sm={12}>
             <AddPropertyForm isPosting={isPosting} onSubmit={this.submit} />
