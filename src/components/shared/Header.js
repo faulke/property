@@ -8,7 +8,7 @@ import * as actions from '../../actions';
 import styles from './header.less';
 
 const Header = ({ name, logout, isAuthed }) => (
-  <Navbar inverse collapseOnSelect className={styles.navbarMb0}> 
+  <Navbar inverse collapseOnSelect className={styles.navbar}> 
     <Navbar.Header>
       <Navbar.Brand>
         Logo here

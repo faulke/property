@@ -1,3 +1,11 @@
-.navbarMb0 {
+.navbar {
   margin-bottom: 0px !important;
+
+  & > div {
+    width: 90%;
+    
+    @media only screen and (max-width: 767px) {
+      width: 100%;
+    }
+  }
 }
