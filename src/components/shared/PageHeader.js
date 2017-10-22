@@ -23,7 +23,10 @@ PageHeader.propTypes = {
   title: PropTypes.string.isRequired,
   btnStyle: PropTypes.string,
   btnLink: PropTypes.string,
-  btnTitle: PropTypes.string
+  btnTitle: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ])
 };
 
 PageHeader.defaultProps = {
