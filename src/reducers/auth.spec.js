@@ -90,4 +90,3 @@ describe('auth reducer', () => {
     expect(auth(stateBefore, action)).toEqual(stateAfter);
   });
 });
-
