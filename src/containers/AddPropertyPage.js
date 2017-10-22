@@ -31,7 +31,7 @@ class AddPropertyPage extends Component {
           btnTitle={<div><i className={styles.left} /> All properties</div>}
         />
         <Row>
-          <Col sm={12}>
+          <Col sm={4} smOffset={4}>
             <AddPropertyForm isPosting={isPosting} onSubmit={this.submit} />
           </Col>
         </Row>

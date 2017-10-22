@@ -4,9 +4,10 @@ import { browserHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import { Form, FormControl, FormGroup, ControlLabel, Col, Button } from 'react-bootstrap';
 import FormInput from '../shared/FormInput';
+import styles from './addPropertyForm.less';
 
 const AddPropertyForm = ({ isPosting, handleSubmit, pristine }) => (
-  <Form horizontal onSubmit={handleSubmit}>
+  <Form className={styles.form} horizontal onSubmit={handleSubmit}>
     <Field
       type="text"
       name="address"
@@ -52,9 +53,9 @@ const AddPropertyForm = ({ isPosting, handleSubmit, pristine }) => (
       className="form-control"
       required
     />
-    <FormGroup>
-      <Col smOffset={4} sm={4}>
-        <Button type="submit" disabled={pristine || isPosting}>
+    <FormGroup className={styles.formGroup}>
+      <Col>
+        <Button className={styles.button} type="submit" disabled={pristine || isPosting}>
           Add property
         </Button>
       </Col>
