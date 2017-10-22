@@ -13,7 +13,7 @@ const clearLocalUser = () => {
   localStorage.removeItem('name');
 };
 
-export const auth = (state = initialState, action) => {
+const auth = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case actions.GET_AUTH_REQUEST:
@@ -36,3 +36,5 @@ export const auth = (state = initialState, action) => {
       return { ...state };
   }
 };
+
+export default auth;
