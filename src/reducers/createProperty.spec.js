@@ -33,4 +33,18 @@ describe('createProperty reducer', () => {
   
     expect(create(stateBefore, action)).toEqual(stateAfter);
   });
+
+  it('should handle CREATE_PROPERTY_FAILURE action', () => {
+    const action = {
+      type: actions.CREATE_PROPERTY_FAILURE
+    };
+  
+    const stateBefore = { ...initialState, isPosting: true };
+    const stateAfter = { ...stateBefore, isPosting: false };
+  
+    deepFreeze(stateBefore);
+    deepFreeze(stateAfter);
+  
+    expect(create(stateBefore, action)).toEqual(stateAfter);
+  });
 });

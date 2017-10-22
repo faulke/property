@@ -11,6 +11,8 @@ const create = (state = initialState, action) => {
       return { ...state, isPosting: true };
     case actions.CREATE_PROPERTY_SUCCESS:
       return { ...state, isPosting: false };
+    case actions.CREATE_PROPERTY_FAILURE:
+      return { ...state, isPosting: false };
     default:
       return { ...state };
   }
