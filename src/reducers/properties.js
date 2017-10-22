@@ -6,7 +6,7 @@ export const initialState = {
   properties: []
 };
 
-export const properties = (state = initialState, { type, payload }) => {
+const properties = (state = initialState, { type, payload }) => {
   switch (type) {
     case actions.GET_PROPERTIES_REQUEST:
       return { ...state, isFetching: true };
@@ -18,3 +18,5 @@ export const properties = (state = initialState, { type, payload }) => {
       return { ...state };
   }
 };
+
+export default properties;
