@@ -4,7 +4,7 @@ export const initialState = {
   isPosting: false
 };
 
-export const create = (state = initialState, action) => {
+const create = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case actions.CREATE_PROPERTY_REQUEST:
@@ -15,3 +15,5 @@ export const create = (state = initialState, action) => {
       return { ...state };
   }
 };
+
+export default create;
