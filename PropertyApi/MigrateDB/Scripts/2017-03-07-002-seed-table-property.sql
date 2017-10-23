@@ -8,8 +8,7 @@ insert into property (
 	bedrooms,
 	bathrooms,
 	sq_feet,
-	pets,
-	landlord
+	pets
 ) values (
 	'1234 Daisy Lane',
 	'Seattle',
@@ -20,8 +19,7 @@ insert into property (
 	1,
 	1,
 	900,
-	false,
-	'2a60b1a0-d7d4-41a2-978e-f7f4f62a2a2d'
+	false
 ),
 (
 	'18993 5th Ave NE',
@@ -33,8 +31,7 @@ insert into property (
 	3,
 	2,
 	1500,
-	true,
-	'2a60b1a0-d7d4-41a2-978e-f7f4f62a2a2d'
+	true
 ),
 (
 	'1840 Burlington Ave',
@@ -46,8 +43,7 @@ insert into property (
 	1,
 	1,
 	950,
-	true,
-	'c536d9d3-0ac0-499b-b5a8-aae2b91bb249'
+	true
 )
 
 /**
