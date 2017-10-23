@@ -23,6 +23,7 @@ namespace PropertyApi
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {
                     config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                    config.AddJsonFile("hosting.json", optional: true);
                     config.AddEnvironmentVariables();
                 })
                 .Build();
