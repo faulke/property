@@ -143,6 +143,7 @@ module.exports = {
           /\.gif$/,
           /\.jpe?g$/,
           /\.png$/,
+          /\.less$/
         ],
         loader: require.resolve('file-loader'),
         options: {
@@ -182,7 +183,7 @@ module.exports = {
       // use the "style" loader inside the async code so CSS from them won't be
       // in the main CSS file.
       {
-        test: /\.css$/,
+        test: /\.(css|less)$/,
         loader: ExtractTextPlugin.extract(
           Object.assign(
             {
@@ -191,9 +192,11 @@ module.exports = {
                 {
                   loader: require.resolve('css-loader'),
                   options: {
+                    sourceMap: true,
+                    import: true,
                     importLoaders: 1,
                     minimize: true,
-                    sourceMap: true,
+                    modules: true,
                   },
                 },
                 {
@@ -216,6 +219,18 @@ module.exports = {
                     ],
                   },
                 },
+                {
+                  loader: 'less-loader',
+                  options: {
+                    sourceMap: true,
+                    import: true,
+                    importLoaders: 2,
+                    modules: true,
+                    paths: [
+                      path.resolve(__dirname, 'node_modules')
+                    ]
+                  }
+                }
               ],
             },
             extractTextPluginOptions
@@ -227,6 +242,7 @@ module.exports = {
       // Remember to add the new extension(s) to the "file" loader exclusion list.
     ],
   },
+  
   plugins: [
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
