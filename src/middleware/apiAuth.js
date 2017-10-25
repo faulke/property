@@ -19,6 +19,10 @@ export default store => next => action => {
       return { ...headers };
     };
 
+    if (process.env.NODE_ENV === 'production' && process.env.REACT_APP_API) {
+      actionCopy.endpoint = process.env.REACT_APP_API + actionCopy.endpoint;
+    }
+
     actionCopy.types = [
       actionCopy.types[0],
       {
