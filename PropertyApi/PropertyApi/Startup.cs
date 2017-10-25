@@ -57,6 +57,14 @@ namespace PropertyApi
             }
 
             app.UseAuthentication();
+
+            if (env.IsProduction())
+            {
+                app.UseCors(builder =>
+                    builder
+                        .WithOrigins("http://propertyapp-website.s3-website-us-west-2.amazonaws.com")
+                        .AllowAnyHeader());
+            }
             
             app.UseMvc();
         }
