@@ -11,7 +11,7 @@ const Header = ({ name, logout, isAuthed }) => (
   <Navbar inverse collapseOnSelect className={styles.navbar}> 
     <Navbar.Header>
       <Navbar.Brand>
-        Logo here
+        RentalSwag
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
