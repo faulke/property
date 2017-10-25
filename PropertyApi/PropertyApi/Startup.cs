@@ -46,6 +46,7 @@ namespace PropertyApi
             DataConnection.ConnectionString = Configuration.GetConnectionString("database");
 
             services.AddMvc();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +64,10 @@ namespace PropertyApi
                 app.UseCors(builder =>
                     builder
                         .WithOrigins("http://propertyapp-website.s3-website-us-west-2.amazonaws.com")
-                        .AllowAnyHeader());
+                        .WithExposedHeaders("Access-Control-Allow-Origin")
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                        .AllowAnyMethod());
             }
             
             app.UseMvc();
