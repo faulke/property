@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 import { Grid, Row, Col } from 'react-bootstrap';
 import * as actions from '../actions/index';
 import AddPropertyForm from '../components/property/AddPropertyForm';
-import { createProperty } from '../selectors';
+import { createProperty, fileUpload } from '../selectors';
 import PageHeader from '../components/shared/PageHeader.js';
 import styles from './addProperty.less';
 
@@ -21,7 +21,7 @@ class AddPropertyPage extends Component {
   }
 
   render() {
-    const { isPosting } = this.props;
+    const { isPosting, isUploading } = this.props;
     return (
       <Grid fluid style={{ flex: "auto" }}>
         <PageHeader
@@ -32,7 +32,11 @@ class AddPropertyPage extends Component {
         />
         <Row>
           <Col sm={4} smOffset={4}>
-            <AddPropertyForm isPosting={isPosting} onSubmit={this.submit} />
+            <AddPropertyForm 
+              isPosting={isPosting} 
+              onSubmit={this.submit}
+              isUploading={isUploading}
+            />
           </Col>
         </Row>
       </Grid>
@@ -42,11 +46,13 @@ class AddPropertyPage extends Component {
 
 AddPropertyPage.propTypes = {
   createProperty: PropTypes.func.isRequired,
-  isPosting: PropTypes.bool.isRequired
+  isPosting: PropTypes.bool.isRequired,
+  isUploading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
-  ...createProperty(state)
+  ...createProperty(state),
+  ...fileUpload(state)
 });
 
 export default connect(mapStateToProps, actions)(AddPropertyPage);

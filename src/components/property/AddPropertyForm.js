@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { browserHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import { Form, FormControl, FormGroup, ControlLabel, Col, Button } from 'react-bootstrap';
 import FormInput from '../shared/FormInput';
+import FileUpload from '../shared/FileUpload';
 import styles from './addPropertyForm.less';
 
-const AddPropertyForm = ({ isPosting, handleSubmit, pristine }) => (
+const AddPropertyForm = ({ isPosting, isUploading, handleSubmit, pristine }) => (
   <Form className={styles.form} horizontal onSubmit={handleSubmit}>
     <Field
       type="text"
@@ -53,9 +53,19 @@ const AddPropertyForm = ({ isPosting, handleSubmit, pristine }) => (
       className="form-control"
       required
     />
+    <FileUpload />
+    <input
+      type="hidden"
+      name="storageKey"
+      value="2bfbc06f-c7cb-4e7f-8986-0e97cccccbbc"
+    />
     <FormGroup className={styles.formGroup}>
       <Col>
-        <Button className={styles.button} type="submit" disabled={pristine || isPosting}>
+        <Button 
+          className={styles.button} 
+          type="submit" 
+          disabled={pristine || isPosting || isUploading}
+        >
           Add property
         </Button>
       </Col>
@@ -66,7 +76,8 @@ const AddPropertyForm = ({ isPosting, handleSubmit, pristine }) => (
 AddPropertyForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
-  isPosting: PropTypes.bool.isRequired
+  isPosting: PropTypes.bool.isRequired,
+  isUploading: PropTypes.bool.isRequired
 };
 
 export default reduxForm({
