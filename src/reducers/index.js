@@ -3,12 +3,14 @@ import { reducer as form } from 'redux-form';
 import properties from './properties';
 import auth from './auth';
 import create from './createProperty';
+import fileUpload from './fileUpload';
 
 const rootReducer = combineReducers({
   properties,
   auth,
   create,
-  form
+  form,
+  fileUpload
 });
 
 export default rootReducer;

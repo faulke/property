@@ -1,4 +1,4 @@
-import { CALL_API } from 'redux-api-middleware';
+import { CALL_API, getJSON } from 'redux-api-middleware';
 import querystring from 'query-string';
 
 const headers = () => ({
@@ -98,3 +98,48 @@ export const LOGOUT = 'LOGOUT';
 export const logout = () => ({
   type: LOGOUT
 });
+
+
+export const PRESIGNED_URL_REQUEST = 'PRESIGNED_URL_REQUEST';
+export const PRESIGNED_URL_SUCCESS = 'PRESIGNED_URL_SUCCESS';
+export const PRESIGNED_URL_FAILURE = 'PRESIGNED_URL_FAILURE';
+export const getPresignedUrl = file => dispatch => {
+  const data = new FormData();
+  data.append('files', file);
+  data.append('Content-Type', file.type);
+
+  return dispatch({
+    [CALL_API]: {
+      endpoint: `/api/files`,
+      method: 'POST',
+      body: data,
+      types: [
+        'PRESIGNED_URL_REQUEST',
+        {
+          type: 'PRESIGNED_URL_SUCCESS',
+          payload: (action, state, res) => {
+            getJSON(res).then((json) => {
+              dispatch(uploadFile(json.urls, file));
+              return json;
+            });
+          }
+        },
+        'PRESIGNED_URL_FAILURE'
+      ]
+    }
+  });
+};
+
+export const FILE_UPLOAD_REQUEST = 'FILE_UPLOAD_REQUEST';
+export const FILE_UPLOAD_SUCCESS = 'FILE_UPLOAD_SUCCESS';
+export const FILE_UPLOAD_FAILURE = 'FILE_UPLOAD_FAILURE';
+export const uploadFile = (urls, file) => dispatch => {
+  dispatch({ type: FILE_UPLOAD_REQUEST });
+  fetch(urls[0], {
+    method: 'put',
+    headers: {
+      'Content-type': file.type
+    },
+    body: file
+  }).then(res => dispatch({ type: FILE_UPLOAD_SUCCESS }));
+};
