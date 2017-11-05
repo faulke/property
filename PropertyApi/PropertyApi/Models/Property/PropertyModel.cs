@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PropertyApi.Models
 {
-    public class Property
+    public class PropertyModel
     {
         public int Id { get; set; }
         public string Address { get; set; }
@@ -18,27 +18,27 @@ namespace PropertyApi.Models
         [JsonIgnore]
         public string Landlord { get; set; }
 
-        public static List<Property> GetAll(string userId)
+        public static List<PropertyModel> GetAll(string userId)
         {
             var conn = DataConnection.GetConnection();
             using (conn)
             {
                 var sql = "select * from property where landlord = @userId order by id desc";
-                return conn.Query<Property>(sql, new { userId }).ToList();
+                return conn.Query<PropertyModel>(sql, new { userId }).ToList();
             }
         }
 
-        public static Property GetById(int id, string userId)
+        public static PropertyModel GetById(int id, string userId)
         {
             var conn = DataConnection.GetConnection();
             using (conn)
             {
                 var sql = "select * from property where id = @id and landlord = @userId";
-                return conn.Query<Property>(sql, new { id, userId }).FirstOrDefault();
+                return conn.Query<PropertyModel>(sql, new { id, userId }).FirstOrDefault();
             }
         }
 
-        public static dynamic AddItem(Property property, string userId)
+        public static dynamic AddItem(PropertyModel property, string userId)
         {
             var conn = DataConnection.GetConnection();
             using (conn)
