@@ -41,7 +41,8 @@ namespace PropertyApi.Controllers
                         BucketName = "property-files-dev",
                         Key = $"{fileList.guid}/{file.FileName}",
                         Verb = HttpVerb.PUT,
-                        Expires = DateTime.Now.AddMinutes(5)
+                        Expires = DateTime.Now.AddMinutes(5),
+                        ContentType = file.ContentType
                     };
 
                     var url = _s3Client.GetPreSignedURL(request);
