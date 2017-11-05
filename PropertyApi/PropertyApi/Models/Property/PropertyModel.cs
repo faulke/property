@@ -15,6 +15,7 @@ namespace PropertyApi.Models
         public string State { get; set; }
         public int Zipcode { get; set; }
         public int Rent { get; set; }
+        public string StorageKey { get; set; }
         [JsonIgnore]
         public string Landlord { get; set; }
 
@@ -49,7 +50,8 @@ namespace PropertyApi.Models
                     state,
                     zipcode,
                     rent,
-                    landlord
+                    landlord,
+                    storageKey
                 ) 
                 values (
                     @Address,
@@ -57,7 +59,8 @@ namespace PropertyApi.Models
                     @State,
                     @Zipcode,
                     @Rent,
-                    @Landlord
+                    @Landlord,
+                    @StorageKey
                 ) returning id;";
 
                 var result = conn.ExecuteScalar<int>(sql, property);

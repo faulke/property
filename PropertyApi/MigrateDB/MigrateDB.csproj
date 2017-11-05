@@ -9,6 +9,11 @@
   <ItemGroup>
     <None Remove="Scripts\2017-10-01-002-drop-table-jwt.sql" />
     <None Remove="Scripts\2017-10-01-003-create-table-jwt-2.sql" />
+    <None Remove="Scripts\2017-11-05-001-alter-table-property-add-storagekey.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\2017-11-05-001-alter-table-property-add-storagekey.sql" />
   </ItemGroup>
 
   <ItemGroup>
