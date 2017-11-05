@@ -14,7 +14,7 @@ using PropertyApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using PropertyApi.Options;
-using Microsoft.IdentityModel.Tokens;
+using Amazon.S3;
 
 namespace PropertyApi
 {
@@ -47,6 +47,9 @@ namespace PropertyApi
 
             services.AddMvc();
             services.AddCors();
+
+            services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+            services.AddAWSService<IAmazonS3>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
