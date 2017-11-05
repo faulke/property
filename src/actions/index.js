@@ -74,7 +74,7 @@ export const CREATE_PROPERTY_REQUEST = 'CREATE_PROPERTY_REQUEST';
 export const CREATE_PROPERTY_SUCCESS = 'CREATE_PROPERTY_SUCCESS';
 export const CREATE_PROPERTY_FAILURE = 'CREATE_PROPERTY_FAILURE';
 
-export const createProperty = ({ address, city, state, zipcode, rent }) => ({
+export const createProperty = ({ address, city, state, zipcode, rent, storageKey }) => ({
   [CALL_API]: {
     endpoint: `/api/properties/add`,
     method: 'POST',
@@ -84,7 +84,8 @@ export const createProperty = ({ address, city, state, zipcode, rent }) => ({
       city,
       state,
       zipcode,
-      rent
+      rent,
+      storageKey
     }),
     types: [
       'CREATE_PROPERTY_REQUEST',
@@ -103,9 +104,10 @@ export const logout = () => ({
 export const PRESIGNED_URL_REQUEST = 'PRESIGNED_URL_REQUEST';
 export const PRESIGNED_URL_SUCCESS = 'PRESIGNED_URL_SUCCESS';
 export const PRESIGNED_URL_FAILURE = 'PRESIGNED_URL_FAILURE';
-export const getPresignedUrl = file => dispatch => {
+export const getPresignedUrl = (file, uuid) => dispatch => {
   const data = new FormData();
   data.append('files', file);
+  data.append('guid', uuid);
   data.append('Content-Type', file.type);
 
   return dispatch({
@@ -134,12 +136,14 @@ export const FILE_UPLOAD_REQUEST = 'FILE_UPLOAD_REQUEST';
 export const FILE_UPLOAD_SUCCESS = 'FILE_UPLOAD_SUCCESS';
 export const FILE_UPLOAD_FAILURE = 'FILE_UPLOAD_FAILURE';
 export const uploadFile = (urls, file) => dispatch => {
-  dispatch({ type: FILE_UPLOAD_REQUEST });
+  dispatch({ type: FILE_UPLOAD_REQUEST, payload: { file } });
   fetch(urls[0], {
     method: 'put',
     headers: {
       'Content-type': file.type
     },
     body: file
-  }).then(res => dispatch({ type: FILE_UPLOAD_SUCCESS }));
+  }).then(res => {
+    dispatch({ type: FILE_UPLOAD_SUCCESS });
+  });
 };

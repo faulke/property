@@ -21,7 +21,7 @@ class AddPropertyPage extends Component {
   }
 
   render() {
-    const { isPosting, isUploading } = this.props;
+    const { isPosting, isUploading, files } = this.props;
     return (
       <Grid fluid style={{ flex: "auto" }}>
         <PageHeader
@@ -36,6 +36,7 @@ class AddPropertyPage extends Component {
               isPosting={isPosting} 
               onSubmit={this.submit}
               isUploading={isUploading}
+              files={files}
             />
           </Col>
         </Row>
@@ -47,7 +48,8 @@ class AddPropertyPage extends Component {
 AddPropertyPage.propTypes = {
   createProperty: PropTypes.func.isRequired,
   isPosting: PropTypes.bool.isRequired,
-  isUploading: PropTypes.bool.isRequired
+  isUploading: PropTypes.bool.isRequired,
+  files: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

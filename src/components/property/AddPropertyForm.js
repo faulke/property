@@ -2,11 +2,15 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import { Form, FormControl, FormGroup, ControlLabel, Col, Button } from 'react-bootstrap';
+import uuid from 'uuid/v4';
 import FormInput from '../shared/FormInput';
 import FileUpload from '../shared/FileUpload';
+import FileLoader from '../shared/FileLoader';
 import styles from './addPropertyForm.less';
 
-const AddPropertyForm = ({ isPosting, isUploading, handleSubmit, pristine }) => (
+const storageKey = uuid();
+
+const AddPropertyForm = ({ files, isPosting, isUploading, handleSubmit, pristine }) => (
   <Form className={styles.form} horizontal onSubmit={handleSubmit}>
     <Field
       type="text"
@@ -53,11 +57,44 @@ const AddPropertyForm = ({ isPosting, isUploading, handleSubmit, pristine }) => 
       className="form-control"
       required
     />
-    <FileUpload />
-    <input
-      type="hidden"
+    <Field 
+      type="file" 
+      component="file"
+      name="files"
+    >
+      <FileUpload
+        uuid={storageKey}
+        label="Photos"
+        name="photos"
+      />
+    </Field>
+    {
+      files.map((file) => (
+        <div 
+          key={file.name} 
+          name={file.name} 
+          style={{
+            position: "relative",
+            display: "inline-block",
+            height: "150px",
+            width: "150px",
+            marginRight: "10px",
+            border: "1px solid black",
+            backgroundImage: `url(${file.preview})`,
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
+            opacity: isUploading ? "0.3" : "1"
+          }}
+        >
+          { isUploading ? <FileLoader /> : '' }
+        </div>
+      ))
+    }
+    <Field
+      component="input"
+      type="hidden" 
       name="storageKey"
-      value="2bfbc06f-c7cb-4e7f-8986-0e97cccccbbc"
     />
     <FormGroup className={styles.formGroup}>
       <Col>
@@ -77,9 +114,13 @@ AddPropertyForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   isPosting: PropTypes.bool.isRequired,
-  isUploading: PropTypes.bool.isRequired
+  isUploading: PropTypes.bool.isRequired,
+  files: PropTypes.array.isRequired
 };
 
 export default reduxForm({
-  form: 'addProperty'
+  form: 'addProperty',
+  initialValues: {
+    storageKey
+  }
 })(AddPropertyForm);
