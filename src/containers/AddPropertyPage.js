@@ -17,7 +17,8 @@ class AddPropertyPage extends Component {
   }
 
   submit(values) {
-    this.props.createProperty(values);
+    const { files } = this.props;
+    this.props.createProperty(values, files);
   }
 
   render() {
@@ -31,7 +32,7 @@ class AddPropertyPage extends Component {
           btnTitle={<div><i className={styles.left} /> All properties</div>}
         />
         <Row>
-          <Col sm={4} smOffset={4}>
+          <Col sm={10} smOffset={1}>
             <AddPropertyForm 
               isPosting={isPosting} 
               onSubmit={this.submit}

@@ -74,7 +74,7 @@ export const CREATE_PROPERTY_REQUEST = 'CREATE_PROPERTY_REQUEST';
 export const CREATE_PROPERTY_SUCCESS = 'CREATE_PROPERTY_SUCCESS';
 export const CREATE_PROPERTY_FAILURE = 'CREATE_PROPERTY_FAILURE';
 
-export const createProperty = ({ address, city, state, zipcode, rent, storageKey }) => ({
+export const createProperty = ({ address, city, state, zipcode, rent, storageKey }, files) => ({
   [CALL_API]: {
     endpoint: `/api/properties/add`,
     method: 'POST',
@@ -85,7 +85,8 @@ export const createProperty = ({ address, city, state, zipcode, rent, storageKey
       state,
       zipcode,
       rent,
-      storageKey
+      storageKey,
+      files
     }),
     types: [
       'CREATE_PROPERTY_REQUEST',
