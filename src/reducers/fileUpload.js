@@ -23,7 +23,7 @@ const fileUpload = (state = initialState, action) => {
       console.log('SUCCESS!');
       return { ...state, isUploading: false };
     default:
-      return { ...state };
+      return { ...state, files: [] };
   }
 };
 
