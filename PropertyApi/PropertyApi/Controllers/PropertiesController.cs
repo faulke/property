@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using PropertyApi.Models.Property;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,24 +25,24 @@ namespace PropertyApi.Controllers
 
         // GET api/properties
         [HttpGet]
-        public List<Property> GetAll()
+        public List<PropertyListItemModel> GetAll()
         {
-            return Property.GetAll(UserId);
+            return PropertyModel.GetAll(UserId);
         }
 
         // GET api/properties/2
         [HttpGet("{id}")]
-        public Property Get(int id)
+        public PropertyModel Get(int id)
         {
-            return Property.GetById(id, UserId);
+            return PropertyModel.GetById(id, UserId);
         }
 
         // POST api/properties/add
         [HttpPost("{add}")]
-        public dynamic Post([FromBody]Property property)
+        public dynamic Post([FromBody]PropertyModel property)
         {
             property.Landlord = UserId;
-            return Property.AddItem(property, UserId);
+            return PropertyModel.AddItem(property, UserId);
         }
     }
 }
