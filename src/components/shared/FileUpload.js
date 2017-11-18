@@ -16,7 +16,7 @@ class FileUpload extends Component {
   }
 
   onDrop(files) {
-    this.props.getPresignedUrl(files[0], this.props.uuid);
+    files.forEach(file => this.props.getPresignedUrl(file, this.props.uuid));
   }
 
   render() {
