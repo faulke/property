@@ -1,5 +1,7 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using PropertyApi.Models.Property;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,7 @@ namespace PropertyApi.Models
         public string StorageKey { get; set; }
         [JsonIgnore]
         public string Landlord { get; set; }
+        public List<FileModel> Files { get; set; }
 
         public static List<PropertyModel> GetAll(string userId)
         {
@@ -63,8 +66,45 @@ namespace PropertyApi.Models
                     @StorageKey
                 ) returning id;";
 
-                var result = conn.ExecuteScalar<int>(sql, property);
-                return new { id = result };
+                var id = conn.ExecuteScalar<int>(sql, property);
+                var files = property.Files;
+
+                foreach (var file in files)
+                {
+                    file.CreatedDate = DateTime.UtcNow;
+                    file.StorageKey = property.StorageKey;
+                    file.StorageBucket = "property-files-dev";
+                    file.PropertyId = id;
+                    file.FileUrl = $"https://s3.amazonaws.com/{file.StorageBucket}/{file.StorageKey}/{file.FileName}";
+
+                    // todo: insert file index
+                    var sql2 = @"insert into propertyfile (
+                        propertyid,
+                        filename,
+                        storagekey,
+                        storagebucket,
+                        createddate
+                    )
+                    values (
+                        @PropertyId,
+                        @FileName,
+                        @StorageKey,
+                        @StorageBucket,
+                        @CreatedDate
+                    );";
+
+                    conn.Execute(sql2, 
+                        new {
+                            PropertyId = file.PropertyId,
+                            FileName = file.FileName,
+                            StorageKey = file.StorageKey,
+                            StorageBucket = file.StorageBucket,
+                            CreatedDate = file.CreatedDate
+                        }
+                    );
+                }
+
+                return new { id };
             }
         }
     }
