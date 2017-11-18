@@ -60,7 +60,7 @@ namespace PropertyApi.Models
                         @createdDate
                     ) returning id;";
 
-                var jtiId = conn.Query<Jwt>(sql, new { userId, jti, createdDate = DateTime.Now }).FirstOrDefault();
+                var jtiId = conn.Query<Jwt>(sql, new { userId, jti, createdDate = DateTime.UtcNow }).FirstOrDefault();
             }
 
             return token;
