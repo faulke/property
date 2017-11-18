@@ -18,7 +18,6 @@
     },
     "PropertyApi": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "api/properties",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
