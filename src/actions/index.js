@@ -86,7 +86,10 @@ export const createProperty = ({ address, city, state, zipcode, rent, storageKey
       zipcode,
       rent,
       storageKey,
-      files
+      files: files.map((x) => ({
+        filename: x.name,
+        type: x.type
+      }))
     }),
     types: [
       'CREATE_PROPERTY_REQUEST',
