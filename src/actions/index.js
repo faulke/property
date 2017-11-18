@@ -144,7 +144,8 @@ export const uploadFile = (urls, file) => dispatch => {
   fetch(urls[0], {
     method: 'put',
     headers: {
-      'Content-type': file.type
+      'Content-type': file.type,
+      'Cache-Control': 'max-age=229000'
     },
     body: file
   }).then(res => {
