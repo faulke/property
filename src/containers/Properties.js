@@ -11,6 +11,7 @@ import Sidebar from '../components/shared/Sidebar';
 import Loader from '../components/shared/Loader';
 import PageHeader from '../components/shared/PageHeader';
 import styles from './properties.less';
+import s3Url from '../utils/s3Url';
 
 class Properties extends Component {
   componentWillMount() {
@@ -39,15 +40,19 @@ class Properties extends Component {
           />
           <Row className={styles.propertyRow}>
             {
-              properties.map(x => (
-                <PropertyItem
-                  key={x.id}
-                  address={x.address}
-                  city={x.city}
-                  state={x.state}
-                  zipcode={x.zipcode}
-                />
-              ))
+              properties.map((x) => {
+                const image = s3Url(x);
+                return (
+                  <PropertyItem
+                    key={x.id}
+                    address={x.address}
+                    city={x.city}
+                    state={x.state}
+                    zipcode={x.zipcode}
+                    image={image}
+                  />
+                );
+              })
             }
           </Row>
         </Grid>

@@ -5,11 +5,12 @@ import { Link } from 'react-router';
 import styles from './propertyItem.less';
 
 const PropertyItem = ({ ...props }) => {
-  const hasHeader = false;
-  const headerImgProp = 'https://d30y9cdsu7xlg0.cloudfront.net/png/7757-200.png';
+  const hasCoverImage = props.image !== null;
+  const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/7757-200.png';
+  const coverImage = hasCoverImage ? props.image : defaultImage;
   const imgStyle = {
-    backgroundImage: `url(${headerImgProp})`,
-    backgroundSize: hasHeader ? 'cover' : '60px 60px',
+    backgroundImage: `url(${coverImage})`,
+    backgroundSize: hasCoverImage ? 'cover' : '60px 60px',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center'
   };
@@ -17,7 +18,7 @@ const PropertyItem = ({ ...props }) => {
     <Col sm={6} className={styles.propertyContainer}>
       <Grid fluid className={styles.property}>
         <Row>
-          <Col sm={12}>
+          <Col sm={12} className={styles.imgContainer}>
             <div style={imgStyle} className={styles.img} />
           </Col>
         </Row>
@@ -44,7 +45,12 @@ PropertyItem.propTypes = {
   address: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,
-  zipcode: PropTypes.number.isRequired
+  zipcode: PropTypes.number.isRequired,
+  image: PropTypes.string
+};
+
+PropertyItem.defaultProps = {
+  image: null
 };
 
 export default PropertyItem;
