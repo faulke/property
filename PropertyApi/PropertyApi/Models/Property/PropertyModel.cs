@@ -22,13 +22,31 @@ namespace PropertyApi.Models
         public string Landlord { get; set; }
         public List<FileModel> Files { get; set; }
 
-        public static List<PropertyModel> GetAll(string userId)
+        public static List<PropertyListItemModel> GetAll(string userId)
         {
             var conn = DataConnection.GetConnection();
             using (conn)
             {
-                var sql = "select * from property where landlord = @userId order by id desc";
-                return conn.Query<PropertyModel>(sql, new { userId }).ToList();
+                // this returns just the first image for the property from propertyfile
+                // todo: return only cover image (fileindex = 0? coverimage = true?)
+                var sql = @"
+                    select distinct on (pr.id)
+                        pr.id,
+                        pr.address,
+                        pr.city,
+                        pr.state,
+                        pr.zipcode,
+                        pr.rent,
+                        pf.storagebucket,
+                        pf.storagekey,
+                        pf.filename
+                    from property as pr
+                    left join propertyfile as pf on pr.id = pf.propertyid
+	                    where pr.landlord = @userId
+                    order by pr.id desc;";
+                var result = conn.Query<PropertyListItemModel>(sql, new { userId }).ToList();
+
+                return result;
             }
         }
 
@@ -37,8 +55,21 @@ namespace PropertyApi.Models
             var conn = DataConnection.GetConnection();
             using (conn)
             {
-                var sql = "select * from property where id = @id and landlord = @userId";
-                return conn.Query<PropertyModel>(sql, new { id, userId }).FirstOrDefault();
+                var sql = @"
+                    select * from property where 
+                        id = @id and 
+                        landlord = @userId;
+                    select * from propertyfile where
+                        propertyid = @id;";
+
+                var result = conn.QueryMultiple(sql, new { id, userId });
+
+                var property = result.Read<PropertyModel>().FirstOrDefault();
+                var files = result.Read<FileModel>().ToList();
+
+                property.Files = files;
+
+                return property;
             }
         }
 
@@ -75,7 +106,7 @@ namespace PropertyApi.Models
                     file.StorageKey = property.StorageKey;
                     file.StorageBucket = "property-files-dev";
                     file.PropertyId = id;
-                    file.FileUrl = $"https://s3.amazonaws.com/{file.StorageBucket}/{file.StorageKey}/{file.FileName}";
+                    file.FileUrl = $"https://s3-us-west-2.amazonaws.com/{file.StorageBucket}/{file.StorageKey}/{file.FileName}";
 
                     // todo: insert file index
                     var sql2 = @"insert into propertyfile (
