@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using PropertyApi.Models.Property;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,7 +25,7 @@ namespace PropertyApi.Controllers
 
         // GET api/properties
         [HttpGet]
-        public List<PropertyModel> GetAll()
+        public List<PropertyListItemModel> GetAll()
         {
             return PropertyModel.GetAll(UserId);
         }
