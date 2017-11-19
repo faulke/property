@@ -108,7 +108,9 @@ export const logout = () => ({
 export const PRESIGNED_URL_REQUEST = 'PRESIGNED_URL_REQUEST';
 export const PRESIGNED_URL_SUCCESS = 'PRESIGNED_URL_SUCCESS';
 export const PRESIGNED_URL_FAILURE = 'PRESIGNED_URL_FAILURE';
+export const UPDATE_FILE_PREVIEW = 'UPDATE_FILE_PREVIEW';
 export const getPresignedUrl = (file, uuid) => dispatch => {
+  dispatch({ type: UPDATE_FILE_PREVIEW, payload: { file } });
   const data = new FormData();
   data.append('files', file);
   data.append('guid', uuid);
@@ -140,7 +142,7 @@ export const FILE_UPLOAD_REQUEST = 'FILE_UPLOAD_REQUEST';
 export const FILE_UPLOAD_SUCCESS = 'FILE_UPLOAD_SUCCESS';
 export const FILE_UPLOAD_FAILURE = 'FILE_UPLOAD_FAILURE';
 export const uploadFile = (urls, file) => dispatch => {
-  dispatch({ type: FILE_UPLOAD_REQUEST, payload: { file } });
+  dispatch({ type: FILE_UPLOAD_REQUEST });
   fetch(urls[0], {
     method: 'put',
     headers: {
@@ -151,4 +153,9 @@ export const uploadFile = (urls, file) => dispatch => {
   }).then(res => {
     dispatch({ type: FILE_UPLOAD_SUCCESS });
   });
+};
+
+export const DELETE_FILE = 'DELETE_FILE';
+export const deleteFile = (index) => dispatch => {
+  dispatch({ type: DELETE_FILE, payload: { index } });
 };

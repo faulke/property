@@ -14,11 +14,16 @@ class AddPropertyPage extends Component {
     super(props);
 
     this.submit = this.submit.bind(this);
+    this.deleteFile = this.deleteFile.bind(this);
   }
 
   submit(values) {
     const { files } = this.props;
     this.props.createProperty(values, files);
+  }
+
+  deleteFile(index) {
+    this.props.deleteFile(index);
   }
 
   render() {
@@ -38,6 +43,7 @@ class AddPropertyPage extends Component {
               onSubmit={this.submit}
               isUploading={isUploading}
               files={files}
+              deleteFile={this.deleteFile}
             />
           </Col>
         </Row>
@@ -50,7 +56,8 @@ AddPropertyPage.propTypes = {
   createProperty: PropTypes.func.isRequired,
   isPosting: PropTypes.bool.isRequired,
   isUploading: PropTypes.bool.isRequired,
-  files: PropTypes.array.isRequired
+  files: PropTypes.array.isRequired,
+  deleteFile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

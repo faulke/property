@@ -1,22 +1,49 @@
 .fileupload {
+  height: 150px;
   width: 100%;
-  min-height: 150px;
   border: 1px dashed black;
+  position: relative;
+}
 
-  .fileRow {
-    width: 90%;
-    margin: 0 auto;
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
 
-    .filePreview {
-      position: relative;
-      display: inline-block;
-      height: 150px;
-      width: 150px;
-      margin-right: 15px;
-      border: 1px solid black;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-    }
+.fileRow {
+  margin: 10px 0px 10px;
+  border: 1px solid black;
+
+  .labelSuccess {
+    display: inline-block;
+    margin: 5px 0px 5px;
+    padding: 0px 5px 0px 5px;
+    background-color: #3D40F5;
+    color: white;
+  }
+
+  .filePreview {
+    width: 80%;
+    border: 1px solid black;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  .filePreview:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  textarea {
+    resize: vertical;
+    width: 100%;
+  }
+
+  textarea:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
   }
 }
