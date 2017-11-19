@@ -6,6 +6,12 @@ import { browserHistory } from 'react-router';
 // allow custom meta/payload handlers for success/failure
 const copyActionTypes = (copiedTypes) => {
   const successMeta = (act, state, res) => {
+    const header = res.headers.get('Authorization');
+    if (header) {
+      const jwt = header.split('Bearer ')[1];
+      localStorage.setItem('jwt', jwt);
+    }
+
     if (res.status === 401) {
       localStorage.removeItem('jwt');
       browserHistory.push('/account/login');
