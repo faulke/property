@@ -9,10 +9,10 @@ import styles from './addPropertyForm.less';
 
 const storageKey = uuid();
 
-const AddPropertyForm = ({ files, isPosting, isUploading, handleSubmit, pristine }) => (
+const AddPropertyForm = ({ files, isPosting, isUploading, handleSubmit, pristine, deleteFile }) => (
   <Form className={styles.form} horizontal onSubmit={handleSubmit}>
     <Row>
-      <Col sm={6}>
+      <Col sm={6} smOffset={3}>
         <Field
           type="text"
           name="address"
@@ -58,6 +58,24 @@ const AddPropertyForm = ({ files, isPosting, isUploading, handleSubmit, pristine
           className="form-control"
           required
         />
+      </Col>
+    </Row>
+    <Row style={{ marginBottom: "75px" }}>
+      <Col sm={12} md={8} mdOffset={2}>
+        <Field
+          name="files"
+          label="Media"
+          component={FileUpload}
+          files={files}
+          isUploading={isUploading}
+          uuid={storageKey}
+          delete={deleteFile}
+        />
+        <Field
+          component="input"
+          type="hidden" 
+          name="storageKey"
+        />
         <FormGroup className={styles.formGroup}>
           <Col>
             <Button 
@@ -70,20 +88,6 @@ const AddPropertyForm = ({ files, isPosting, isUploading, handleSubmit, pristine
           </Col>
         </FormGroup>
       </Col>
-      <Col sm={6}>
-        <Field
-          name="files"
-          component={FileUpload}
-          files={files}
-          isUploading={isUploading}
-          uuid={storageKey}
-        />
-        <Field
-          component="input"
-          type="hidden" 
-          name="storageKey"
-        />
-      </Col>
     </Row>
   </Form>
 );
@@ -93,7 +97,8 @@ AddPropertyForm.propTypes = {
   pristine: PropTypes.bool.isRequired,
   isPosting: PropTypes.bool.isRequired,
   isUploading: PropTypes.bool.isRequired,
-  files: PropTypes.array.isRequired
+  files: PropTypes.array.isRequired,
+  deleteFile: PropTypes.func.isRequired
 };
 
 export default reduxForm({

@@ -20,9 +20,12 @@ class FileUpload extends Component {
   }
 
   render() {
-    const { files, isUploading, input } = this.props;
+    const { files, isUploading, input, label } = this.props;
     return (
-      <FormGroup controlId={name}>
+      <FormGroup controlId={input.name}>
+        <Col componentClass={ControlLabel}>
+          {label}
+        </Col>
         <Col>
           <Dropzone 
             onDrop={this.onDrop}
@@ -30,25 +33,52 @@ class FileUpload extends Component {
             className={`${styles.fileupload}`}
           >
             <p>Try dropping some files here, or click to select files to upload.</p>
-            <Row className={styles.fileRow}>
-              {
-                files.map((file, i) => (
-                  <div 
-                    key={i}
-                    className={styles.filePreview}
-                    name={file.name}
-                    data-index={i}
-                    style={{
-                      backgroundImage: `url(${file.preview})`,
-                      opacity: isUploading ? "0.3" : "1"
-                    }}
-                  >
-                    { isUploading ? <FileLoader /> : '' }
-                  </div>
-                ))
-              }
-            </Row>
           </Dropzone>
+          {
+            files.map((file, i) => (
+              <Row key={i} className={styles.fileRow}>
+                <Row className={styles.row}>
+                  <Col sm={12}>
+                    <p>{ i === 0 ? "Cover photo" : "" }</p>
+                  </Col>
+                </Row>
+                <Row className={styles.row}>
+                  <Col xs={4}>
+                    <div
+                      className={styles.filePreview}
+                      name={file.name}
+                      data-index={i}
+                      style={{
+                        backgroundImage: `url(${file.preview})`,
+                        opacity: isUploading ? "0.3" : "1"
+                      }}
+                    >
+                      { isUploading ? <FileLoader /> : '' }
+                    </div>
+                  </Col>
+                  <Col xs={8}>
+                    <textarea style={{ height: "150px", width: "100%" }} placeholder="Add a caption..." />
+                  </Col>
+                </Row>
+                <Row className={styles.row}>
+                  <Col xs={4} xsOffset={8}>
+                    { 
+                      isUploading ? 
+                      '' :
+                      <a 
+                        role={"button"} 
+                        tabIndex={0} 
+                        style={{ display: "block", textAlign: "right" }}
+                        onClick={() => this.props.delete(i)}
+                      >
+                        X Remove File
+                      </a>
+                    }
+                  </Col>
+                </Row>
+              </Row>
+            ))
+          }
         </Col>
       </FormGroup>
     );
@@ -60,7 +90,9 @@ FileUpload.propTypes = {
   uuid: PropTypes.string.isRequired,
   files: PropTypes.array.isRequired,
   isUploading: PropTypes.bool.isRequired,
-  input: PropTypes.object.isRequired
+  input: PropTypes.object.isRequired,
+  delete: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({

@@ -1,22 +1,25 @@
 .fileupload {
+  height: 150px;
   width: 100%;
-  min-height: 150px;
   border: 1px dashed black;
+  position: relative;
+}
 
-  .fileRow {
-    width: 90%;
-    margin: 0 auto;
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
 
-    .filePreview {
-      position: relative;
-      display: inline-block;
-      height: 150px;
-      width: 150px;
-      margin-right: 15px;
-      border: 1px solid black;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-    }
+.fileRow {
+  margin: 10px 0px 10px;
+  border: 1px solid black;
+
+  .filePreview {
+    width: 100%;
+    height: 150px;
+    border: 1px solid black;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 }
