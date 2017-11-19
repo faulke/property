@@ -39,7 +39,7 @@ class FileUpload extends Component {
               <Row key={i} className={styles.fileRow}>
                 <Row className={styles.row}>
                   <Col sm={12}>
-                    <p>{ i === 0 ? "Cover photo" : "" }</p>
+                    <div className={styles.labelSuccess}>{ i === 0 ? "Cover photo" : "" }</div>
                   </Col>
                 </Row>
                 <Row className={styles.row}>
@@ -57,18 +57,17 @@ class FileUpload extends Component {
                     </div>
                   </Col>
                   <Col xs={8}>
-                    <textarea style={{ height: "150px", width: "100%" }} placeholder="Add a caption..." />
+                    <textarea rows={4} placeholder="Add a caption..." />
                   </Col>
                 </Row>
                 <Row className={styles.row}>
-                  <Col xs={4} xsOffset={8}>
+                  <Col xs={4} xsOffset={8} style={{ textAlign: "right" }}>
                     { 
                       isUploading ? 
                       '' :
                       <a 
                         role={"button"} 
-                        tabIndex={0} 
-                        style={{ display: "block", textAlign: "right" }}
+                        tabIndex={0}
                         onClick={() => this.props.delete(i)}
                       >
                         X Remove File

@@ -61,7 +61,7 @@ const AddPropertyForm = ({ files, isPosting, isUploading, handleSubmit, pristine
       </Col>
     </Row>
     <Row style={{ marginBottom: "75px" }}>
-      <Col sm={12} md={8} mdOffset={2}>
+      <Col sm={12} md={6} mdOffset={3}>
         <Field
           name="files"
           label="Media"
