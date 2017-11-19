@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using PropertyApi.Models.Property;
+using PropertyApi.Options;
+using Microsoft.Extensions.Options;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,9 +20,12 @@ namespace PropertyApi.Controllers
     public class PropertiesController : AuthorizedController
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        public PropertiesController(UserManager<ApplicationUser> userManager)
+        private readonly CloudParams _cloudOpts;
+
+        public PropertiesController(UserManager<ApplicationUser> userManager, IOptions<CloudParams> cloudOpts)
         {
             _userManager = userManager;
+            _cloudOpts = cloudOpts.Value;
         }
 
         // GET api/properties
@@ -42,7 +47,7 @@ namespace PropertyApi.Controllers
         public dynamic Post([FromBody]PropertyModel property)
         {
             property.Landlord = UserId;
-            return PropertyModel.AddItem(property, UserId);
+            return PropertyModel.AddItem(property, UserId, _cloudOpts.StorageBucket);
         }
     }
 }

@@ -9,6 +9,8 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using System.IO;
 using PropertyApi.Models.Property;
+using PropertyApi.Options;
+using Microsoft.Extensions.Options;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,10 +20,12 @@ namespace PropertyApi.Controllers
     public class FilesController : Controller
     {
         private IAmazonS3 _s3Client { get; set; }
+        private readonly CloudParams _cloudOpts;
 
-        public FilesController (IAmazonS3 s3Client)
+        public FilesController (IAmazonS3 s3Client, IOptions<CloudParams> cloudOpts)
         {
             _s3Client = s3Client;
+            _cloudOpts = cloudOpts.Value;
         }
 
         // POST api/files
@@ -38,7 +42,7 @@ namespace PropertyApi.Controllers
                 {
                     var request = new GetPreSignedUrlRequest
                     {
-                        BucketName = "property-files-dev",
+                        BucketName = _cloudOpts.StorageBucket,
                         Key = $"{fileList.guid}/{file.FileName}",
                         Verb = HttpVerb.PUT,
                         Expires = DateTime.Now.AddMinutes(5),

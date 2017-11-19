@@ -1,7 +1,9 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using PropertyApi.Models.Property;
+using PropertyApi.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,7 +75,7 @@ namespace PropertyApi.Models
             }
         }
 
-        public static dynamic AddItem(PropertyModel property, string userId)
+        public static dynamic AddItem(PropertyModel property, string userId, string StorageBucket)
         {
             var conn = DataConnection.GetConnection();
             using (conn)
@@ -104,7 +106,7 @@ namespace PropertyApi.Models
                 {
                     file.CreatedDate = DateTime.UtcNow;
                     file.StorageKey = property.StorageKey;
-                    file.StorageBucket = "property-files-dev";
+                    file.StorageBucket = StorageBucket;
                     file.PropertyId = id;
                     file.FileUrl = $"https://s3-us-west-2.amazonaws.com/{file.StorageBucket}/{file.StorageKey}/{file.FileName}";
 

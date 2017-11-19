@@ -38,6 +38,7 @@ namespace PropertyApi
                 .AddDefaultTokenProviders();
 
             services.Configure<TokenParams>(Configuration.GetSection("Tokens"));
+            services.Configure<CloudParams>(Configuration);
 
             services.AddAuthentication();
             services.AddSingleton<Jwt>();
