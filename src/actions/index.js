@@ -1,5 +1,6 @@
 import { CALL_API, getJSON } from 'redux-api-middleware';
 import querystring from 'query-string';
+import { reset } from 'redux-form';
 
 const headers = () => ({
   Accept: 'application/json',
@@ -74,7 +75,7 @@ export const CREATE_PROPERTY_REQUEST = 'CREATE_PROPERTY_REQUEST';
 export const CREATE_PROPERTY_SUCCESS = 'CREATE_PROPERTY_SUCCESS';
 export const CREATE_PROPERTY_FAILURE = 'CREATE_PROPERTY_FAILURE';
 
-export const createProperty = ({ address, city, state, zipcode, rent, storageKey }, files) => ({
+export const createProperty = ({ address, city, state, zipcode, rent }, storageKey, files) => ({
   [CALL_API]: {
     endpoint: `/api/properties/add`,
     method: 'POST',
@@ -99,11 +100,16 @@ export const createProperty = ({ address, city, state, zipcode, rent, storageKey
   }
 });
 
+export const RESET_FORM = 'RESET_FORM';
+export const resetForm = form => dispatch => {
+  dispatch(reset(form));
+  dispatch({ type: RESET_FORM });
+};
+
 export const LOGOUT = 'LOGOUT';
 export const logout = () => ({
   type: LOGOUT
 });
-
 
 export const PRESIGNED_URL_REQUEST = 'PRESIGNED_URL_REQUEST';
 export const PRESIGNED_URL_SUCCESS = 'PRESIGNED_URL_SUCCESS';

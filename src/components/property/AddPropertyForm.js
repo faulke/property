@@ -2,14 +2,19 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import { Form, FormControl, FormGroup, ControlLabel, Row, Col, Button } from 'react-bootstrap';
-import uuid from 'uuid/v4';
 import FormInput from '../shared/FormInput';
 import FileUpload from '../shared/FileUpload';
 import styles from './addPropertyForm.less';
 
-const storageKey = uuid();
-
-const AddPropertyForm = ({ files, isPosting, isUploading, handleSubmit, pristine, deleteFile }) => (
+const AddPropertyForm = ({
+  files, 
+  isPosting, 
+  isUploading, 
+  handleSubmit, 
+  pristine, 
+  deleteFile,
+  storageKey
+}) => (
   <Form className={styles.form} horizontal onSubmit={handleSubmit}>
     <Row>
       <Col sm={6} smOffset={3}>
@@ -71,11 +76,6 @@ const AddPropertyForm = ({ files, isPosting, isUploading, handleSubmit, pristine
           uuid={storageKey}
           delete={deleteFile}
         />
-        <Field
-          component="input"
-          type="hidden" 
-          name="storageKey"
-        />
         <FormGroup className={styles.formGroup}>
           <Col>
             <Button 
@@ -98,12 +98,10 @@ AddPropertyForm.propTypes = {
   isPosting: PropTypes.bool.isRequired,
   isUploading: PropTypes.bool.isRequired,
   files: PropTypes.array.isRequired,
-  deleteFile: PropTypes.func.isRequired
+  deleteFile: PropTypes.func.isRequired,
+  storageKey: PropTypes.string.isRequired
 };
 
 export default reduxForm({
-  form: 'addProperty',
-  initialValues: {
-    storageKey
-  }
+  form: 'addProperty'
 })(AddPropertyForm);

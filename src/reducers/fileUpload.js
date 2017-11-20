@@ -1,10 +1,12 @@
+import uuid from 'uuid/v4';
 import * as actions from '../actions';
 
 export const initialState = {
   isPosting: false,
   isUploading: false,
   urls: null,
-  files: []
+  files: [],
+  storageKey: uuid()
 };
 
 const fileUpload = (state = initialState, action) => {
@@ -20,8 +22,9 @@ const fileUpload = (state = initialState, action) => {
       return { ...state, isUploading: false };
     case actions.DELETE_FILE:
       state.files.splice(payload.index, 1);
-      console.log(state.files);
       return { ...state, files: [...state.files] };
+    case actions.RESET_FORM:
+      return { ...initialState, storageKey: uuid() };
     default:
       return { ...state };
   }

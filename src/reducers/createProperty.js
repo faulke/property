@@ -1,7 +1,8 @@
 import * as actions from '../actions';
 
 export const initialState = {
-  isPosting: false
+  isPosting: false,
+  success: false
 };
 
 const create = (state = initialState, action) => {
@@ -10,9 +11,11 @@ const create = (state = initialState, action) => {
     case actions.CREATE_PROPERTY_REQUEST:
       return { ...state, isPosting: true };
     case actions.CREATE_PROPERTY_SUCCESS:
-      return { ...state, isPosting: false };
+      return { ...state, isPosting: false, success: true };
     case actions.CREATE_PROPERTY_FAILURE:
       return { ...state, isPosting: false };
+    case actions.RESET_FORM:
+      return { ...initialState };
     default:
       return { ...state };
   }
