@@ -45,6 +45,7 @@ namespace PropertyApi.Models
                     from property as pr
                     left join propertyfile as pf on pr.id = pf.propertyid
 	                    where pr.landlord = @userId
+                        and pf.fileindex = 0
                     order by pr.id desc;";
                 var result = conn.Query<PropertyListItemModel>(sql, new { userId }).ToList();
 
@@ -114,6 +115,7 @@ namespace PropertyApi.Models
                     var sql2 = @"insert into propertyfile (
                         propertyid,
                         filename,
+                        fileindex,
                         storagekey,
                         storagebucket,
                         createddate
@@ -121,6 +123,7 @@ namespace PropertyApi.Models
                     values (
                         @PropertyId,
                         @FileName,
+                        @FileIndex,
                         @StorageKey,
                         @StorageBucket,
                         @CreatedDate
@@ -130,6 +133,7 @@ namespace PropertyApi.Models
                         new {
                             PropertyId = file.PropertyId,
                             FileName = file.FileName,
+                            FileIndex = file.FileIndex,
                             StorageKey = file.StorageKey,
                             StorageBucket = file.StorageBucket,
                             CreatedDate = file.CreatedDate

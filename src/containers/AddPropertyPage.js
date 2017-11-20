@@ -23,6 +23,7 @@ class AddPropertyPage extends Component {
 
   submit(values) {
     const { files, storageKey } = this.props;
+    files.forEach((file, index) => file.index = index);
     this.props.createProperty(values, storageKey, files);
   }
 
