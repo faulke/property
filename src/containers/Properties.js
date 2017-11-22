@@ -45,6 +45,7 @@ class Properties extends Component {
                 return (
                   <PropertyItem
                     key={x.id}
+                    id={x.id}
                     address={x.address}
                     city={x.city}
                     state={x.state}
