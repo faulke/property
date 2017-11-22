@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../actions';
 import { propertyDetail } from '../selectors';
+import s3Url from '../utils/s3Url';
+import Loader from '../components/shared/Loader';
 
 class PropertyDetailPage extends Component {
   componentWillMount() {
@@ -11,8 +13,27 @@ class PropertyDetailPage extends Component {
   }
 
   render() {
+    if (this.props.details === null) {
+      return (<Loader />);
+    }
+
+    const { address, city, state, zipcode, rent, files } = this.props.details;
     return (
-      <div>Property details</div>
+      <div>
+        <div>{address}</div>
+        <div>{city}</div>
+        <div>{state}</div>
+        <div>{zipcode}</div>
+        <div>{rent}</div>
+        {
+          files.map((x, i) => {
+            const url = s3Url(x);
+            return (
+              <img alt="property" key={i} src={url} style={{ height: '100px', width: '100px' }} />
+            );
+          })
+        }
+      </div>
     );
   }
 
@@ -20,7 +41,12 @@ class PropertyDetailPage extends Component {
 
 PropertyDetailPage.propTypes = {
   params: PropTypes.object.isRequired,
-  fetchPropertyDetail: PropTypes.func.isRequired
+  fetchPropertyDetail: PropTypes.func.isRequired,
+  details: PropTypes.object
+};
+
+PropertyDetailPage.defaultProps = {
+  details: null
 };
 
 const mapStateToProps = state => ({

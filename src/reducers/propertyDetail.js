@@ -1,7 +1,7 @@
 import * as actions from '../actions';
 
 export const initialState = {
-  details: {},
+  details: null,
   isFetching: false
 };
 
