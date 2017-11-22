@@ -13,27 +13,29 @@ class PropertyDetailPage extends Component {
   }
 
   render() {
-    if (this.props.details === null) {
-      return (<Loader />);
+    const { isFetching, details } = this.props;
+    if (details === null) {
+      return <Loader />;
     }
 
-    const { address, city, state, zipcode, rent, files } = this.props.details;
     return (
-      <div>
-        <div>{address}</div>
-        <div>{city}</div>
-        <div>{state}</div>
-        <div>{zipcode}</div>
-        <div>{rent}</div>
-        {
-          files.map((x, i) => {
-            const url = s3Url(x);
-            return (
-              <img alt="property" key={i} src={url} style={{ height: '100px', width: '100px' }} />
-            );
-          })
-        }
-      </div>
+      isFetching ?
+        <Loader /> :
+        <div>
+          <div>{details.address}</div>
+          <div>{details.city}</div>
+          <div>{details.state}</div>
+          <div>{details.zipcode}</div>
+          <div>{details.rent}</div>
+          {
+            details.files.map((x, i) => {
+              const url = s3Url(x);
+              return (
+                <img alt="property" key={i} src={url} style={{ height: '100px', width: '100px' }} />
+              );
+            })
+          }
+        </div>
     );
   }
 
@@ -42,7 +44,8 @@ class PropertyDetailPage extends Component {
 PropertyDetailPage.propTypes = {
   params: PropTypes.object.isRequired,
   fetchPropertyDetail: PropTypes.func.isRequired,
-  details: PropTypes.object
+  details: PropTypes.object,
+  isFetching: PropTypes.bool.isRequired
 };
 
 PropertyDetailPage.defaultProps = {
