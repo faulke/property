@@ -107,7 +107,7 @@ export const createProperty =
   return actionResponse.then((res) => {
     if (!res.error) {
       const id = res.payload.id;
-      browserHistory.push(`/property/${id}`);
+      browserHistory.push(`/properties/${id}`);
     }
   });
 };
@@ -177,3 +177,18 @@ export const DELETE_FILE = 'DELETE_FILE';
 export const deleteFile = (index) => dispatch => {
   dispatch({ type: DELETE_FILE, payload: { index } });
 };
+
+export const PROPERTY_DETAIL_REQUEST = 'PROPERTY_DETAIL_REQUEST';
+export const PROPERTY_DETAIL_SUCCESS = 'PROPERTY_DETAIL_SUCCESS';
+export const PROPERTY_DETAIL_FAILURE = 'PROPERTY_DETAIL_FAILURE';
+export const fetchPropertyDetail = id => ({
+  [CALL_API]: {
+    endpoint: `/api/properties/${id}`,
+    method: 'GET',
+    types: [
+      'PROPERTY_DETAIL_REQUEST',
+      'PROPERTY_DETAIL_SUCCESS',
+      'PROPERTY_DETAIL_FAILURE'
+    ]
+  }
+});
