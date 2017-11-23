@@ -9,8 +9,8 @@ const PropertyDetailHeader = ({ address, city, state, zipcode, coverUrl }) => {
   const coverImage = coverUrl || 'https://d30y9cdsu7xlg0.cloudfront.net/png/7757-200.png';
   return (
     <div>
-      <Col sm={1} smHidden />
-      <Col sm={10} className={styles.headerContainer}>
+      <Col sm={1} mdHidden />
+      <Col lg={10} md={12} sm={12} className={styles.headerContainer}>
         <div
           className={styles.coverImg}
           style={{ 

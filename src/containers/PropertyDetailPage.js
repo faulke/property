@@ -49,16 +49,19 @@ class PropertyDetailPage extends Component {
             />
           </Row>
           <Row>
-            <Tabs
-              activeKey={this.state.key} 
-              onSelect={this.handleTabSelect}
-              animation={false}
-              id="property-detail-tabs"
-            >
-              <Tab eventKey={1} title="Payments">Payments</Tab>
-              <Tab eventKey={2} title="Listing">Listing</Tab>
-              <Tab eventKey={3} title="Applications">Applications</Tab>
-            </Tabs>
+            <Col lg={1} mdHidden />
+            <Col lg={10}>
+              <Tabs
+                activeKey={this.state.key} 
+                onSelect={this.handleTabSelect}
+                animation={false}
+                id="property-detail-tabs"
+              >
+                <Tab eventKey={1} title="Payments">Payments</Tab>
+                <Tab eventKey={2} title="Listing">Listing</Tab>
+                <Tab eventKey={3} title="Applications">Applications</Tab>
+              </Tabs>
+            </Col>
           </Row>
         </Grid>
     );
