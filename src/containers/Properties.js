@@ -29,34 +29,34 @@ class Properties extends Component {
   render() {
     const { isFetching, properties } = this.props;
     return (
-      isFetching ? 
-        <Loader /> :
-        <Grid fluid style={{ flex: "auto" }}>
-          <PageHeader
-            title={"Properties"}
-            btnStyle={`btn btn-success ${styles.addProperty}`}
-            btnLink={"properties/add"}
-            btnTitle={"Add property"}
-          />
-          <Row className={styles.propertyRow}>
-            {
-              properties.map((x) => {
-                const image = s3Url(x);
-                return (
-                  <PropertyItem
-                    key={x.id}
-                    id={x.id}
-                    address={x.address}
-                    city={x.city}
-                    state={x.state}
-                    zipcode={x.zipcode}
-                    image={image}
-                  />
-                );
-              })
-            }
-          </Row>
-        </Grid>
+      <Grid fluid style={{ flex: "auto" }}>
+        <PageHeader
+          title={"Properties"}
+          btnStyle={`btn btn-success ${styles.addProperty}`}
+          btnLink={"properties/add"}
+          btnTitle={"Add property"}
+        />
+        <Row className={styles.propertyRow}>
+          { 
+            isFetching ? 
+              <Loader /> :
+                properties.map((x) => {
+                  const image = s3Url(x);
+                  return (
+                    <PropertyItem
+                      key={x.id}
+                      id={x.id}
+                      address={x.address}
+                      city={x.city}
+                      state={x.state}
+                      zipcode={x.zipcode}
+                      image={image}
+                    />
+                  );
+                })
+          }
+        </Row>
+      </Grid>
     );
   }
 }
