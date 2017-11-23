@@ -6,12 +6,13 @@ import styles from './pageHeader.less';
 
 const PageHeader = ({ title, btnStyle, btnLink, btnTitle }) => (
   <Row className={styles.pageHeader}>
-    <Col xs={7}>
+    <Col sm={1} xsHidden />
+    <Col sm={6} xs={12}>
       <h1 className={styles.headerTitle}>{title}</h1>
     </Col>
     {
       btnStyle ?
-        <Col xs={5} className={styles.headerRight}>
+        <Col sm={5} smPull={1} className={styles.headerRight}>
           <Link to={btnLink} className={btnStyle}>{btnTitle}</Link>
         </Col> :
         ''
@@ -20,7 +21,10 @@ const PageHeader = ({ title, btnStyle, btnLink, btnTitle }) => (
 );
 
 PageHeader.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]).isRequired,
   btnStyle: PropTypes.string,
   btnLink: PropTypes.string,
   btnTitle: PropTypes.oneOfType([

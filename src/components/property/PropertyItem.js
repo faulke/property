@@ -16,7 +16,7 @@ const PropertyItem = ({ ...props }) => {
   };
   return (
     <Link to={`/properties/${props.id}`}>
-      <Col sm={6} className={styles.propertyContainer}>
+      <Col md={6} className={styles.propertyContainer}>
         <Grid fluid className={styles.property}>
           <Row>
             <Col sm={12} className={styles.imgContainer}>
