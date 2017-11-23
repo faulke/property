@@ -15,7 +15,7 @@ export default (
       <Route path="/properties">
         <IndexRoute component={Properties} />
         <Route path="/properties/add" component={AddPropertyPage} />
-        <Route path="/properties/:id" component={PropertyDetailPage} />
+        <Route path="/properties/:id(/:tab)" component={PropertyDetailPage} />
       </Route>
     </Route>
     <Route component={EmptyLayout}>

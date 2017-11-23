@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
+import { browserHistory } from 'react-router';
 import * as actions from '../actions';
 import { propertyDetail } from '../selectors';
 import s3Url from '../utils/s3Url';
@@ -14,6 +15,7 @@ class PropertyDetailPage extends Component {
     super(props);
 
     this.handleTabSelect = this.handleTabSelect.bind(this);
+    this.setRouteParam = this.setRouteParam.bind(this);
 
     this.state = {
       key: 1
@@ -21,12 +23,55 @@ class PropertyDetailPage extends Component {
   }
 
   componentWillMount() {
-    const { id } = this.props.params;
+    const { id, tab } = this.props.params;
+    console.log('fetching property detail');
     this.props.fetchPropertyDetail(id);
+    if (!tab) {
+      this.setRouteParam('payments');
+    } else {
+      switch (tab) {
+        case 'listing':
+          this.setState({ key: 2 });
+          break;
+        case 'applications':
+          this.setState({ key: 3 });
+          break;
+        default:
+          this.setState({ key: 1 });
+      }
+      this.setRouteParam(tab);
+    }
+  }
+
+  setRouteParam(tab) {
+    const { id } = this.props.params;
+    browserHistory.replace(`/properties/${id}/${tab}`);
+    console.log(`/api/${tab}/${id}`);
+    /* this.props.fetchPropertyDetail(tab)
+        -- this will fetch api route based on tab
+        -- i.e., /api/{tab}/{id}
+        -- e.g., /api/payments/155
+        -- potentially cache these results for certain amount of time?
+    */
   }
 
   handleTabSelect(key) {
+    let tab = null;
+    switch (key) {
+      case 1:
+        tab = 'payments';
+        break;
+      case 2:
+        tab = 'listing';
+        break;
+      case 3:
+        tab = 'applications';
+        break;
+      default:
+        tab = 'payments';
+    }
     this.setState({ key });
+    this.setRouteParam(tab);
   }
 
   render() {
