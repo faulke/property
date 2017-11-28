@@ -23,6 +23,12 @@ const copyActionTypes = (copiedTypes) => {
       localStorage.removeItem('jwt');
       browserHistory.push('/account/login');
     }
+    if (res.status === 500) {
+      browserHistory.push('/error/500');
+    }
+    if (res.status === 404) {
+      browserHistory.push('/error/404');
+    }
   };
 
   const failurePayload = (act, state, res) => getJSON(res);
