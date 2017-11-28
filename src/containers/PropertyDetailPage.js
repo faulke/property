@@ -85,7 +85,7 @@ class PropertyDetailPage extends Component {
               city={details.city}
               state={details.state}
               zipcode={details.zipcode}
-              coverUrl={s3Url(details.files[0]) || null}
+              coverUrl={details.files.length ? s3Url(details.files[0]) : 'https://d30y9cdsu7xlg0.cloudfront.net/png/7757-200.png'}
             />
           </Row>
           <Row>
