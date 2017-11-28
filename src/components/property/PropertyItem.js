@@ -15,7 +15,7 @@ const PropertyItem = ({ ...props }) => {
     backgroundPosition: 'center center'
   };
   return (
-    <Link to={`/properties/${props.id}/payments`}>
+    <Link to={`/properties/${props.id}/listing`}>
       <Col md={6} className={styles.propertyContainer}>
         <Grid fluid className={styles.property}>
           <Row>

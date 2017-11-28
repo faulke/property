@@ -24,17 +24,16 @@ class PropertyDetailPage extends Component {
 
   componentWillMount() {
     const { id, tab } = this.props.params;
-    console.log('fetching property detail');
     this.props.fetchPropertyDetail(id);
     if (!tab) {
-      this.setRouteParam('payments');
+      this.setRouteParam('listing');
     } else {
       switch (tab) {
         case 'listing':
-          this.setState({ key: 2 });
+          this.setState({ key: 1 });
           break;
         case 'applications':
-          this.setState({ key: 3 });
+          this.setState({ key: 2 });
           break;
         default:
           this.setState({ key: 1 });
@@ -46,7 +45,6 @@ class PropertyDetailPage extends Component {
   setRouteParam(tab) {
     const { id } = this.props.params;
     browserHistory.replace(`/properties/${id}/${tab}`);
-    console.log(`/api/${tab}/${id}`);
     /* this.props.fetchPropertyDetail(tab)
         -- this will fetch api route based on tab
         -- i.e., /api/{tab}/{id}
@@ -59,16 +57,13 @@ class PropertyDetailPage extends Component {
     let tab = null;
     switch (key) {
       case 1:
-        tab = 'payments';
-        break;
-      case 2:
         tab = 'listing';
         break;
-      case 3:
+      case 2:
         tab = 'applications';
         break;
       default:
-        tab = 'payments';
+        tab = 'listing';
     }
     this.setState({ key });
     this.setRouteParam(tab);
@@ -102,9 +97,8 @@ class PropertyDetailPage extends Component {
                 animation={false}
                 id="property-detail-tabs"
               >
-                <Tab eventKey={1} title="Payments">Payments</Tab>
-                <Tab eventKey={2} title="Listing">Listing</Tab>
-                <Tab eventKey={3} title="Applications">Applications</Tab>
+                <Tab eventKey={1} title="Listing">Listing</Tab>
+                <Tab eventKey={2} title="Applications">Applications</Tab>
               </Tabs>
             </Col>
           </Row>
