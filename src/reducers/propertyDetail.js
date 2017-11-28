@@ -2,7 +2,8 @@ import * as actions from '../actions';
 
 export const initialState = {
   details: null,
-  isFetching: false
+  isFetching: false,
+  showModal: false
 };
 
 const propertyDetail = (state = initialState, { type, payload }) => {
@@ -13,6 +14,10 @@ const propertyDetail = (state = initialState, { type, payload }) => {
       return { ...state, details: { ...payload }, isFetching: false };
     case actions.PROPERTY_DETAIL_FAILURE:
       return { ...state, isFetching: false };
+    case actions.SHOW_PROPERTY_MODAL:
+      return { ...state, showModal: true };
+    case actions.CLOSE_MODAL:
+      return { ...state, showModal: false };
     default:
       return { ...state };
   }

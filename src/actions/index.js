@@ -75,6 +75,7 @@ export const fetchProperties = ({ pets, min_sqft }) => ({
 export const CREATE_PROPERTY_REQUEST = 'CREATE_PROPERTY_REQUEST';
 export const CREATE_PROPERTY_SUCCESS = 'CREATE_PROPERTY_SUCCESS';
 export const CREATE_PROPERTY_FAILURE = 'CREATE_PROPERTY_FAILURE';
+export const SHOW_PROPERTY_MODAL = 'SHOW_PROPERTY_MODAL';
 
 export const createProperty = 
 ({ address, city, state, zipcode, rent }, storageKey, files) => dispatch => {
@@ -108,8 +109,14 @@ export const createProperty =
     if (!res.error) {
       const id = res.payload.id;
       browserHistory.push(`/properties/${id}`);
+      dispatch({ type: SHOW_PROPERTY_MODAL });
     }
   });
+};
+
+export const CLOSE_MODAL = 'CLOSE MODAL';
+export const closeModal = () => dispatch => {
+  dispatch({ type: CLOSE_MODAL });
 };
 
 export const RESET_FORM = 'RESET_FORM';

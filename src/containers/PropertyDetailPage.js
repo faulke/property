@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
-import { browserHistory } from 'react-router';
+import { Grid, Row, Col, Tabs, Tab, Modal } from 'react-bootstrap';
+import { browserHistory, Link } from 'react-router';
 import * as actions from '../actions';
 import { propertyDetail } from '../selectors';
 import s3Url from '../utils/s3Url';
@@ -16,6 +16,7 @@ class PropertyDetailPage extends Component {
 
     this.handleTabSelect = this.handleTabSelect.bind(this);
     this.setRouteParam = this.setRouteParam.bind(this);
+    this.closeModal = this.closeModal.bind(this);
 
     this.state = {
       key: 1
@@ -69,8 +70,13 @@ class PropertyDetailPage extends Component {
     this.setRouteParam(tab);
   }
 
+  closeModal() {
+    this.props.closeModal();
+  }
+
   render() {
-    const { isFetching, details } = this.props;
+    const { isFetching, details, showModal } = this.props;
+
     if (details === null) {
       return <Loader />;
     }
@@ -102,6 +108,14 @@ class PropertyDetailPage extends Component {
               </Tabs>
             </Col>
           </Row>
+          <Modal show={showModal} onHide={this.closeModal}>
+            <Modal.Header closeButton />
+            <Modal.Body>
+              You added a new property!  What would you like to do next?
+              {details.address}
+              <Link to="/properties/add">Create another property</Link>
+            </Modal.Body>
+          </Modal>
         </Grid>
     );
   }
@@ -112,7 +126,9 @@ PropertyDetailPage.propTypes = {
   params: PropTypes.object.isRequired,
   fetchPropertyDetail: PropTypes.func.isRequired,
   details: PropTypes.object,
-  isFetching: PropTypes.bool.isRequired
+  isFetching: PropTypes.bool.isRequired,
+  showModal: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired
 };
 
 PropertyDetailPage.defaultProps = {
