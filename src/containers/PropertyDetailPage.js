@@ -76,6 +76,7 @@ class PropertyDetailPage extends Component {
 
   render() {
     const { isFetching, details, showModal } = this.props;
+    const { id } = this.props.params;
 
     if (details === null) {
       return <Loader />;
@@ -111,15 +112,35 @@ class PropertyDetailPage extends Component {
           <Modal show={showModal} onHide={this.closeModal}>
             <Modal.Header closeButton />
             <Modal.Body>
-              You added a new property!  What would you like to do next?
-              {details.address}
-              <Link to="/properties/add">Create another property</Link>
+              <Grid fluid style={{ flex: "auto" }}>
+                <Row style={{ textAlign: "center" }}>
+                  <h1>Success!  You just added {details.address}.</h1>
+                </Row>
+                <Row style={{ textAlign: "center" }}>
+                  <h3>What would you like to do next?</h3>
+                </Row>
+                <Row>
+                  <Col xs={6} style={{ textAlign: "center" }}>
+                    <p>Find tenants</p>
+                    <Link to="/listings/add">Create a listing</Link>
+                  </Col>
+                  <Col xs={6} style={{ textAlign: "center" }}>
+                    <p>Collect rent</p>
+                    <Link to={`/lease/${id}/new`}>Set up your lease</Link>
+                  </Col>
+                </Row>
+                <Row>
+                  <hr />
+                </Row>
+                <Row style={{ textAlign: "center" }}>
+                  <Link to="/properties/add">Add another property</Link>
+                </Row>
+              </Grid>
             </Modal.Body>
           </Modal>
         </Grid>
     );
   }
-
 }
 
 PropertyDetailPage.propTypes = {
