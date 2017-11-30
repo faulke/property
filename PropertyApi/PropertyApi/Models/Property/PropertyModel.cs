@@ -45,7 +45,10 @@ namespace PropertyApi.Models
                     from property as pr
                     left join propertyfile as pf on pr.id = pf.propertyid
 	                    where pr.landlord = @userId
-                        and pf.fileindex = 0
+                       	and (
+                                pf.fileindex = 0
+                                or pf.fileindex is null
+                            )
                     order by pr.id desc;";
                 var result = conn.Query<PropertyListItemModel>(sql, new { userId }).ToList();
 

@@ -1,4 +1,3 @@
-import { browserHistory } from 'react-router';
 import * as actions from '../actions';
 
 export const initialState = {

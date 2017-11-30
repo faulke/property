@@ -15,33 +15,36 @@ const PropertyItem = ({ ...props }) => {
     backgroundPosition: 'center center'
   };
   return (
-    <Col sm={6} className={styles.propertyContainer}>
-      <Grid fluid className={styles.property}>
-        <Row>
-          <Col sm={12} className={styles.imgContainer}>
-            <div style={imgStyle} className={styles.img} />
-          </Col>
-        </Row>
-        <Row className={styles.address}>
-          <Col sm={12}>
-            <h3>{props.address}</h3>
-            <p>{props.city}, {props.state} {props.zipcode}</p>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={12}>
-            <hr className={styles.hr} />
-          </Col>
-          <Col sm={12}>
-            <p>Additional info here</p>
-          </Col>
-        </Row>
-      </Grid>
-    </Col>
+    <Link to={`/properties/${props.id}/listing`}>
+      <Col md={6} className={styles.propertyContainer}>
+        <Grid fluid className={styles.property}>
+          <Row>
+            <Col sm={12} className={styles.imgContainer}>
+              <div style={imgStyle} className={styles.img} />
+            </Col>
+          </Row>
+          <Row className={styles.address}>
+            <Col sm={12}>
+              <h3>{props.address}</h3>
+              <p>{props.city}, {props.state} {props.zipcode}</p>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12}>
+              <hr className={styles.hr} />
+            </Col>
+            <Col sm={12}>
+              <p>Additional info here</p>
+            </Col>
+          </Row>
+        </Grid>
+      </Col>
+    </Link>
   );
 };
 
 PropertyItem.propTypes = {
+  id: PropTypes.number.isRequired,
   address: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,

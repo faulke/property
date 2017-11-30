@@ -1,6 +1,7 @@
 import { CALL_API, getJSON } from 'redux-api-middleware';
 import querystring from 'query-string';
 import { reset } from 'redux-form';
+import { browserHistory } from 'react-router';
 
 const headers = () => ({
   Accept: 'application/json',
@@ -74,32 +75,49 @@ export const fetchProperties = ({ pets, min_sqft }) => ({
 export const CREATE_PROPERTY_REQUEST = 'CREATE_PROPERTY_REQUEST';
 export const CREATE_PROPERTY_SUCCESS = 'CREATE_PROPERTY_SUCCESS';
 export const CREATE_PROPERTY_FAILURE = 'CREATE_PROPERTY_FAILURE';
+export const SHOW_PROPERTY_MODAL = 'SHOW_PROPERTY_MODAL';
 
-export const createProperty = ({ address, city, state, zipcode, rent }, storageKey, files) => ({
-  [CALL_API]: {
-    endpoint: `/api/properties/add`,
-    method: 'POST',
-    headers,
-    body: JSON.stringify({
-      address,
-      city,
-      state,
-      zipcode,
-      rent,
-      storageKey,
-      files: files.map((x) => ({
-        filename: x.name,
-        type: x.type,
-        fileindex: x.index
-      }))
-    }),
-    types: [
-      'CREATE_PROPERTY_REQUEST',
-      'CREATE_PROPERTY_SUCCESS',
-      'CREATE_PROPERTY_FAILURE'
-    ]
-  }
-});
+export const createProperty = 
+({ address, city, state, zipcode, rent }, storageKey, files) => dispatch => {
+  const actionResponse = dispatch({
+    [CALL_API]: {
+      endpoint: `/api/properties/add`,
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        address,
+        city,
+        state,
+        zipcode,
+        rent,
+        storageKey,
+        files: files.map((x) => ({
+          filename: x.name,
+          type: x.type,
+          fileindex: x.index
+        }))
+      }),
+      types: [
+        'CREATE_PROPERTY_REQUEST',
+        'CREATE_PROPERTY_SUCCESS',
+        'CREATE_PROPERTY_FAILURE'
+      ]
+    }
+  });
+
+  return actionResponse.then((res) => {
+    if (!res.error) {
+      const id = res.payload.id;
+      browserHistory.push(`/properties/${id}`);
+      dispatch({ type: SHOW_PROPERTY_MODAL });
+    }
+  });
+};
+
+export const CLOSE_MODAL = 'CLOSE MODAL';
+export const closeModal = () => dispatch => {
+  dispatch({ type: CLOSE_MODAL });
+};
 
 export const RESET_FORM = 'RESET_FORM';
 export const resetForm = form => dispatch => {
@@ -166,3 +184,18 @@ export const DELETE_FILE = 'DELETE_FILE';
 export const deleteFile = (index) => dispatch => {
   dispatch({ type: DELETE_FILE, payload: { index } });
 };
+
+export const PROPERTY_DETAIL_REQUEST = 'PROPERTY_DETAIL_REQUEST';
+export const PROPERTY_DETAIL_SUCCESS = 'PROPERTY_DETAIL_SUCCESS';
+export const PROPERTY_DETAIL_FAILURE = 'PROPERTY_DETAIL_FAILURE';
+export const fetchPropertyDetail = id => ({
+  [CALL_API]: {
+    endpoint: `/api/properties/${id}`,
+    method: 'GET',
+    types: [
+      'PROPERTY_DETAIL_REQUEST',
+      'PROPERTY_DETAIL_SUCCESS',
+      'PROPERTY_DETAIL_FAILURE'
+    ]
+  }
+});
