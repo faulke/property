@@ -68,7 +68,7 @@ namespace PropertyApi
                 app.UseCors(builder =>
                     builder
                         .WithOrigins("http://propertyapp-website.s3-website-us-west-2.amazonaws.com", "http://d2lffdqk93epuu.cloudfront.net")
-                        .WithExposedHeaders("Access-Control-Allow-Origin")
+                        .WithExposedHeaders("Access-Control-Allow-Origin","Authorization")
                         .AllowAnyHeader()
                         .AllowCredentials()
                         .AllowAnyMethod());
