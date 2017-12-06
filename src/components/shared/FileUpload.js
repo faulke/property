@@ -22,7 +22,7 @@ class FileUpload extends Component {
   render() {
     const { files, isUploading, input, label } = this.props;
     return (
-      <FormGroup controlId={input.name}>
+      <FormGroup controlId={input.name} className={styles.container}>
         <Col componentClass={ControlLabel}>
           {label}
         </Col>

@@ -1,49 +1,55 @@
-.fileupload {
-  height: 150px;
-  width: 100%;
-  border: 1px dashed black;
-  position: relative;
-}
+.container {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
 
-.row {
-  margin-left: 0px;
-  margin-right: 0px;
-}
-
-.fileRow {
-  margin: 10px 0px 10px;
-  border: 1px solid black;
-
-  .labelSuccess {
-    display: inline-block;
-    margin: 5px 0px 5px;
-    padding: 0px 5px 0px 5px;
-    background-color: #3D40F5;
-    color: white;
-  }
-
-  .filePreview {
-    width: 80%;
-    border: 1px solid black;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-
-  .filePreview:after {
-    content: "";
-    display: block;
-    padding-bottom: 100%;
-  }
-
-  textarea {
-    resize: vertical;
+  .fileupload {
+    height: 150px;
     width: 100%;
+    border: 1px dashed black;
+    position: relative;
+    cursor: pointer;
   }
 
-  textarea:after {
-    content: "";
-    display: block;
-    padding-bottom: 100%;
+  .row {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .fileRow {
+    margin: 10px 0px 10px;
+    border: 1px solid black;
+
+    .labelSuccess {
+      display: inline-block;
+      margin: 5px 0px 5px;
+      padding: 0px 5px 0px 5px;
+      background-color: #3D40F5;
+      color: white;
+    }
+
+    .filePreview {
+      width: 80%;
+      border: 1px solid black;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    .filePreview:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+
+    textarea {
+      resize: vertical;
+      width: 100%;
+    }
+
+    textarea:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
   }
 }
