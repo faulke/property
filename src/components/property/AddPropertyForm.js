@@ -12,7 +12,6 @@ const AddPropertyForm = ({
   isUploading, 
   handleSubmit, 
   pristine, 
-  deleteFile,
   storageKey
 }) => (
   <Form className={styles.form} horizontal onSubmit={handleSubmit}>
@@ -69,12 +68,12 @@ const AddPropertyForm = ({
       <Col sm={12} md={6} mdOffset={3}>
         <Field
           name="files"
-          label="Media"
+          label="Add a cover image"
           component={FileUpload}
           files={files}
           isUploading={isUploading}
           uuid={storageKey}
-          delete={deleteFile}
+          multiple={false}
         />
         <FormGroup className={styles.formGroup}>
           <Col>
@@ -98,7 +97,6 @@ AddPropertyForm.propTypes = {
   isPosting: PropTypes.bool.isRequired,
   isUploading: PropTypes.bool.isRequired,
   files: PropTypes.array.isRequired,
-  deleteFile: PropTypes.func.isRequired,
   storageKey: PropTypes.string.isRequired
 };
 

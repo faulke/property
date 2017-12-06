@@ -16,11 +16,14 @@ class FileUpload extends Component {
   }
 
   onDrop(files) {
+    if (!this.props.multiple && this.props.files.length) {
+      this.props.deleteFile(0);
+    }
     files.forEach(file => this.props.getPresignedUrl(file, this.props.uuid));
   }
 
   render() {
-    const { files, isUploading, input, label } = this.props;
+    const { files, isUploading, input, label, multiple } = this.props;
     return (
       <FormGroup controlId={input.name} className={styles.container}>
         <Col componentClass={ControlLabel}>
@@ -29,10 +32,11 @@ class FileUpload extends Component {
         <Col>
           <Dropzone 
             onDrop={this.onDrop}
-            name={input.name} 
+            name={input.name}
+            multiple={multiple}
             className={`${styles.fileupload}`}
           >
-            <p>Try dropping some files here, or click to select files to upload.</p>
+            <p>Drop files here, or click to select files to upload.</p>
           </Dropzone>
           {
             files.map((file, i) => (
@@ -64,14 +68,14 @@ class FileUpload extends Component {
                   <Col xs={4} xsOffset={8} style={{ textAlign: "right" }}>
                     { 
                       isUploading ? 
-                      '' :
-                      <a 
-                        role={"button"} 
-                        tabIndex={0}
-                        onClick={() => this.props.delete(i)}
-                      >
-                        X Remove File
-                      </a>
+                        "" :
+                        <a 
+                          role={"button"} 
+                          tabIndex={0}
+                          onClick={() => this.props.deleteFile(i)}
+                        >
+                          X Remove File
+                        </a>
                     }
                   </Col>
                 </Row>
@@ -90,8 +94,9 @@ FileUpload.propTypes = {
   files: PropTypes.array.isRequired,
   isUploading: PropTypes.bool.isRequired,
   input: PropTypes.object.isRequired,
-  delete: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  deleteFile: PropTypes.func.isRequired,
+  multiple: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
