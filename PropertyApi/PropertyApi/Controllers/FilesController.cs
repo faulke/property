@@ -16,7 +16,7 @@ using Microsoft.Extensions.Options;
 
 namespace PropertyApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("v1/[controller]")]
     public class FilesController : Controller
     {
         private IAmazonS3 _s3Client { get; set; }
@@ -28,7 +28,7 @@ namespace PropertyApi.Controllers
             _cloudOpts = cloudOpts.Value;
         }
 
-        // POST api/files
+        // POST v1/files
         // get pre-signed url for each file to upload directly to S3 from client
         [HttpPost]
         [AllowAnonymous]

@@ -17,7 +17,7 @@ using Dapper;
 
 namespace PropertyApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("v1/[controller]/[action]")]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -34,7 +34,7 @@ namespace PropertyApi.Controllers
             _jwt = jwt;
         }
 
-        // POST api/account/register
+        // POST v1/account/register
         [HttpPost]
         public async Task<IActionResult> Register([FromBody]Register creds)
         {
@@ -57,7 +57,7 @@ namespace PropertyApi.Controllers
             return BadRequest();
         }
 
-        // POST api/account/login
+        // POST v1/account/login
         [HttpPost]
         public async Task<IActionResult> Login([FromBody]Login login)
         {

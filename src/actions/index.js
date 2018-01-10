@@ -14,7 +14,7 @@ export const GET_AUTH_FAILURE = 'GET_AUTH_FAILURE';
 
 export const login = (email, password) => ({
   [CALL_API]: {
-    endpoint: `/api/account/login`,
+    endpoint: `/v1/account/login`,
     method: 'POST',
     headers,
     body: JSON.stringify({
@@ -37,7 +37,7 @@ export const register = ({
   confirmPassword
 }) => ({
   [CALL_API]: {
-    endpoint: `/api/account/register`,
+    endpoint: `/v1/account/register`,
     method: 'POST',
     headers,
     body: JSON.stringify({
@@ -61,7 +61,7 @@ export const GET_PROPERTIES_FAILURE = 'GET_PROPERTIES_FAILURE';
 
 export const fetchProperties = ({ pets, min_sqft }) => ({
   [CALL_API]: {
-    endpoint: `/api/properties?${querystring.stringify({ pets, min_sqft })}`,
+    endpoint: `/v1/properties?${querystring.stringify({ pets, min_sqft })}`,
     method: 'GET',
     headers,
     types: [
@@ -81,7 +81,7 @@ export const createProperty =
 ({ address, city, state, zipcode, rent }, storageKey, files) => dispatch => {
   const actionResponse = dispatch({
     [CALL_API]: {
-      endpoint: `/api/properties/add`,
+      endpoint: `/v1/properties/add`,
       method: 'POST',
       headers,
       body: JSON.stringify({
@@ -143,7 +143,7 @@ export const getPresignedUrl = (file, uuid) => dispatch => {
 
   return dispatch({
     [CALL_API]: {
-      endpoint: `/api/files`,
+      endpoint: `/v1/files`,
       method: 'POST',
       body: data,
       types: [
@@ -190,7 +190,7 @@ export const PROPERTY_DETAIL_SUCCESS = 'PROPERTY_DETAIL_SUCCESS';
 export const PROPERTY_DETAIL_FAILURE = 'PROPERTY_DETAIL_FAILURE';
 export const fetchPropertyDetail = id => ({
   [CALL_API]: {
-    endpoint: `/api/properties/${id}`,
+    endpoint: `/v1/properties/${id}`,
     method: 'GET',
     types: [
       'PROPERTY_DETAIL_REQUEST',

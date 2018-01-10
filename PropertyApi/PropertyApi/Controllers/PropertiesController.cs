@@ -16,7 +16,7 @@ using Microsoft.Extensions.Options;
 
 namespace PropertyApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("v1/[controller]")]
     public class PropertiesController : AuthorizedController
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -28,21 +28,21 @@ namespace PropertyApi.Controllers
             _cloudOpts = cloudOpts.Value;
         }
 
-        // GET api/properties
+        // GET v1/properties
         [HttpGet]
         public List<PropertyListItemModel> GetAll()
         {
             return PropertyModel.GetAll(UserId);
         }
 
-        // GET api/properties/2
+        // GET v1/properties/:id
         [HttpGet("{id}")]
         public PropertyModel Get(int id)
         {
             return PropertyModel.GetById(id, UserId);
         }
 
-        // POST api/properties/add
+        // POST v1/properties/add
         [HttpPost("{add}")]
         public dynamic Post([FromBody]PropertyModel property)
         {
