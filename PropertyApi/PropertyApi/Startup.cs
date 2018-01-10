@@ -67,8 +67,8 @@ namespace PropertyApi
             {
                 app.UseCors(builder =>
                     builder
-                        .WithOrigins("http://d2lffdqk93epuu.cloudfront.net", "https://rentalswag.netlify.com")
-                        .WithExposedHeaders("Access-Control-Allow-Origin","Authorization")
+                        .WithOrigins("https://rentalswag.net", "https://rentalswag.netlify.com")
+                        .WithExposedHeaders("Access-Control-Allow-Origin", "Authorization")
                         .AllowAnyHeader()
                         .AllowCredentials()
                         .AllowAnyMethod());
