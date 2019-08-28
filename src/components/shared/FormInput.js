@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, FormGroup, ControlLabel, Row, Col, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, Col } from 'react-bootstrap';
 import { Link } from 'react-router';
 import styles from './formInput.less';
 
