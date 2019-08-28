@@ -1,4 +1,4 @@
-import { isRSAA, CALL_API, getJSON } from 'redux-api-middleware';
+import { isRSAA, RSAA, getJSON } from 'redux-api-middleware';
 import { browserHistory } from 'react-router';
 
 // add auth meta handlers to rsaa actions
@@ -57,7 +57,7 @@ export default store => next => action => {
   const actionTest = typeof action === 'function' ? action() : action;
 
   if (isRSAA(actionTest)) {
-    const actionCopy = { ...actionTest[CALL_API] };
+    const actionCopy = { ...actionTest[RSAA] };
     let headers;
 
     if (actionCopy.headers) {
@@ -82,7 +82,8 @@ export default store => next => action => {
 
     actionCopy.types = copyActionTypes(actionCopy.types);
 
-    return next({ [CALL_API]: actionCopy });
+    return next({ [RSAA]: actionCopy });
   }
+
   return next(action);
 };
