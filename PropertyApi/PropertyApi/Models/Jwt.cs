@@ -26,13 +26,14 @@ namespace PropertyApi.Models
         public string Jti { get; set; }
         public bool IsRevoked { get; set; }
 
-        public JwtSecurityToken Create(string userId)
+        public JwtSecurityToken Create(string userId, IList<string> roles)
         {
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenOpts.Key));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

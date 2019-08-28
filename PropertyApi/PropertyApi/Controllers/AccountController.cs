@@ -46,7 +46,9 @@ namespace PropertyApi.Controllers
 
             if (result.Succeeded)
             {
-                var token = _jwt.Create(user.Id);
+                result = await _userManager.AddToRoleAsync(user, "Landlord");
+                var roles = await _userManager.GetRolesAsync(user);
+                var token = _jwt.Create(user.Id, roles);
 
                 return Ok(new { user = user.FullName, token = new JwtSecurityTokenHandler().WriteToken(token) });
             }
@@ -68,10 +70,11 @@ namespace PropertyApi.Controllers
 
             else
             {
-                var result = await _signInManager.PasswordSignInAsync(user.Email, login.Password, false, false);
+                var result = await _signInManager.CheckPasswordSignInAsync(user, login.Password, false);
                 if (result.Succeeded)
                 {
-                    var token = _jwt.Create(user.Id);
+                    var roles = await _userManager.GetRolesAsync(user);
+                    var token = _jwt.Create(user.Id, roles);
 
                     return Ok(new { user = user.FullName, token = new JwtSecurityTokenHandler().WriteToken(token) });
                 }

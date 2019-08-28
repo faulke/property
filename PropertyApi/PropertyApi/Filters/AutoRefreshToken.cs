@@ -10,6 +10,7 @@ using PropertyApi.Options;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -28,10 +29,13 @@ namespace PropertyApi.Filters
             private readonly TokenParams _tokenOpts;
             private readonly Jwt _jwt;
 
-            public AutoRefreshTokenImpl(IOptions<TokenParams> tokenOpts, Jwt jwt)
+            private readonly UserManager<ApplicationUser> _userManager;
+
+            public AutoRefreshTokenImpl(IOptions<TokenParams> tokenOpts, Jwt jwt, UserManager<ApplicationUser> userManager)
             {
                 _tokenOpts = tokenOpts.Value;
                 _jwt = jwt;
+                _userManager = userManager;
             }
 
             public void OnAuthorization(AuthorizationFilterContext context)
@@ -60,6 +64,10 @@ namespace PropertyApi.Filters
                     // token expired, get jti and check against last jti issued
                     var expiredToken = new JwtSecurityTokenHandler().ReadJwtToken(authValue.Parameter);
                     var jti = expiredToken.Id;
+                    var roles = expiredToken.Claims
+                      .Where(claim => claim.Type == ClaimsIdentity.DefaultRoleClaimType)
+                      .Select(claim => claim.Value)
+                      .ToList();
                     var userId = expiredToken.Subject;
 
                     var lastIssued = _jwt.GetLastJti(userId);
@@ -75,7 +83,7 @@ namespace PropertyApi.Filters
                     }
                     else
                     {
-                        var token = _jwt.Create(userId);
+                        var token = _jwt.Create(userId, roles);
 
                         var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
                         context.HttpContext.Response.Headers.Add("Authorization", string.Format("Bearer {0}", encodedToken));

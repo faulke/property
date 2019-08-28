@@ -10,7 +10,7 @@ using PropertyApi.Filters;
 
 namespace PropertyApi.Controllers
 {
-    [AutoRefreshToken]
+    [AutoRefreshToken, Authorize(AuthenticationSchemes = "Bearer")]
     public class AuthorizedController : Controller
     {
         protected string UserId => User.Identity.Name;
