@@ -8,7 +8,7 @@ namespace MigrateDB
     {
         static int Main(string[] args)
         {
-            var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings:database");
+            var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__database");
 
             var upgrader =
                 DeployChanges.To
