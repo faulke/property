@@ -12,8 +12,8 @@ using System;
 namespace PropertyApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171015211519_ColumnsFirstLastName")]
-    partial class ColumnsFirstLastName
+    [Migration("20190827223555_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

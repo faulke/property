@@ -14,10 +14,10 @@ namespace PropertyApi
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .ConfigureAppConfiguration((builderContext, config) =>
@@ -26,7 +26,6 @@ namespace PropertyApi
                     config.AddJsonFile("appsettings.dev.json", optional: true);
                     config.AddJsonFile("hosting.json", optional: true);
                     config.AddEnvironmentVariables();
-                })
-                .Build();
+                });
     }
 }
