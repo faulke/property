@@ -78,14 +78,14 @@ export const CREATE_PROPERTY_FAILURE = 'CREATE_PROPERTY_FAILURE';
 export const SHOW_PROPERTY_MODAL = 'SHOW_PROPERTY_MODAL';
 
 export const createProperty = 
-({ address, city, state, zipcode, rent }, storageKey, files) => dispatch => {
+({ address1, address2, city, state, zipcode, rent }, storageKey, files) => dispatch => {
   const actionResponse = dispatch({
     [RSAA]: {
       endpoint: `/v1/properties/add`,
       method: 'POST',
       headers,
       body: JSON.stringify({
-        address,
+        address: address1,
         city,
         state,
         zipcode,
