@@ -18,7 +18,6 @@ namespace PropertyApi.Models
         public string City { get; set; }
         public string State { get; set; }
         public int Zipcode { get; set; }
-        public int Rent { get; set; }
         public string StorageKey { get; set; }
         [JsonIgnore]
         public string Landlord { get; set; }
@@ -38,7 +37,6 @@ namespace PropertyApi.Models
                         pr.city,
                         pr.state,
                         pr.zipcode,
-                        pr.rent,
                         pf.storagebucket,
                         pf.storagekey,
                         pf.filename
@@ -89,7 +87,6 @@ namespace PropertyApi.Models
                     city,
                     state,
                     zipcode,
-                    rent,
                     landlord,
                     storageKey
                 ) 
@@ -98,7 +95,6 @@ namespace PropertyApi.Models
                     @City,
                     @State,
                     @Zipcode,
-                    @Rent,
                     @Landlord,
                     @StorageKey
                 ) returning id;";

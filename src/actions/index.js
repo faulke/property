@@ -78,7 +78,7 @@ export const CREATE_PROPERTY_FAILURE = 'CREATE_PROPERTY_FAILURE';
 export const SHOW_PROPERTY_MODAL = 'SHOW_PROPERTY_MODAL';
 
 export const createProperty = 
-({ address1, address2, city, state, zipcode, rent }, storageKey, files) => dispatch => {
+({ address1, address2, city, state, zipcode }, storageKey, files) => dispatch => {
   const actionResponse = dispatch({
     [RSAA]: {
       endpoint: `/v1/properties/add`,
@@ -89,7 +89,6 @@ export const createProperty =
         city,
         state,
         zipcode,
-        rent,
         storageKey,
         files: files.map((x) => ({
           filename: x.name,
