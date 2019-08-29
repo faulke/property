@@ -5,6 +5,7 @@ import auth from './auth';
 import create from './createProperty';
 import fileUpload from './fileUpload';
 import propertyDetail from './propertyDetail';
+import addListing from './addListing';
 
 const rootReducer = combineReducers({
   properties,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   create,
   form,
   fileUpload,
-  propertyDetail
+  propertyDetail,
+  addListing
 });
 
 export default rootReducer;

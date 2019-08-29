@@ -7,6 +7,7 @@ import AddPropertyPage from './containers/AddPropertyPage';
 import LoginPage from './containers/LoginPage';
 import RegisterPage from './containers/RegisterPage';
 import PropertyDetailPage from './containers/PropertyDetailPage';
+import AddListingPage from './containers/AddListingPage';
 
 export default (
   <Router>
@@ -16,6 +17,9 @@ export default (
         <IndexRoute component={Properties} />
         <Route path="/properties/add" component={AddPropertyPage} />
         <Route path="/properties/:id(/:tab)" component={PropertyDetailPage} />
+      </Route>
+      <Route path="/listings">
+        <Route path="/listings/:id/new" component={AddListingPage} />
       </Route>
     </Route>
     <Route component={EmptyLayout}>
