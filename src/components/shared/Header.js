@@ -20,6 +20,7 @@ const Header = ({ name, logout, isAuthed }) => (
         {
           isAuthed ? 
             <Dropdown id="user-dropdown" title={name}>
+              <Dropdown.Item>Profile</Dropdown.Item>
               <Dropdown.Item onClick={logout}>Log out</Dropdown.Item>
             </Dropdown> :
             <Nav.Item 

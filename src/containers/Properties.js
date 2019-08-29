@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import querystring from 'query-string';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row } from 'react-bootstrap';
 import * as actions from '../actions/index';
 import { getProperties } from '../selectors';
 import PropertyItem from '../components/property/PropertyItem';
-import Sidebar from '../components/shared/Sidebar';
 import Loader from '../components/shared/Loader';
 import PageHeader from '../components/shared/PageHeader';
 import styles from './properties.less';

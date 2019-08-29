@@ -1,13 +1,13 @@
 // This component handles the App template used on every page.
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Container, Sidebar, Content, Footer } from 'rsuite';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { isLoggedIn, getAuth } from '../selectors';
 import * as actions from '../actions';
 import Header from './shared/Header';
-import Sidebar from './shared/Sidebar';
+import Sidenav from './shared/Sidenav';
 import styles from './mainLayout.less';
 
 class MainLayout extends Component {
@@ -25,15 +25,18 @@ class MainLayout extends Component {
 
   render() {
     return (
-      <div className={styles.siteWrapper}>
+      <Container>
         <Header logout={this.props.logout} />
-        <div className={styles.main}>
-          <Sidebar />
-          <div className={styles.content}>
+        <Container>
+          <Sidebar className={styles.sidebar}>
+            <Sidenav />
+          </Sidebar>
+          <Content className={styles.content}>
             {this.props.children}
-          </div>
-        </div>
-      </div>
+          </Content>
+        </Container>
+        <Footer />
+      </Container>
     );
   }
 }

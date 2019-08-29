@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { Sidenav, Nav, Icon } from 'rsuite';
 import * as actions from '../../actions';
-import styles from './sidebar.less';
+import styles from './sidenav.less';
 
 const NavLink = props => <Nav.Item componentClass={Link} {...props} />;
 

@@ -122,7 +122,7 @@ class PropertyDetailPage extends Component {
                 <Row>
                   <Col xs={6} style={{ textAlign: "center" }}>
                     <p>Find tenants</p>
-                    <Link to="/listings/add">Create a listing</Link>
+                    <Link to={`/listings/${id}/new`}>Create a listing</Link>
                   </Col>
                   <Col xs={6} style={{ textAlign: "center" }}>
                     <p>Collect rent</p>
