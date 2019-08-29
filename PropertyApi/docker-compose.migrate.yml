@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:11
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=dev
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  migrate:
+    build:
+      context: ./PropertyApi
+      dockerfile: ./Dockerfile.migrate
+      args:
+        - PGUSER=postgres
+        - PGPASS=postgres
+        - PGHOST=db
+        - PGDATABASE=dev
+    links:
+      - "db"
+    depends_on:
+      - "db"
+    volumes:
+      - ./PropertyApi/Migrations:/opt/migrations
+    command: ./Scripts/migrate.sh
