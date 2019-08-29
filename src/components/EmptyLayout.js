@@ -1,9 +1,8 @@
 // This component handles the App template used on every page.
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+import { Container, Content, Footer } from 'rsuite';
 import { getAuth } from '../selectors';
 import * as actions from '../actions';
 import Header from './shared/Header';
@@ -16,10 +15,12 @@ class EmptyLayout extends Component {
 
   render() {
     return (
-      <div className={styles.body}>
+      <Container>
         <Header />
-        {this.props.children}
-      </div>
+        <Content>
+          {this.props.children}
+        </Content>
+      </Container>
     );
   }
 }
