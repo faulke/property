@@ -28,9 +28,7 @@ class MainLayout extends Component {
       <div className={styles.siteWrapper}>
         <Header logout={this.props.logout} />
         <div className={styles.main}>
-          <aside className={styles.sidebar}>
-            <Sidebar />
-          </aside>
+          <Sidebar />
           <div className={styles.content}>
             {this.props.children}
           </div>
