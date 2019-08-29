@@ -1,41 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-import { browserHistory } from 'react-router';
+import { Navbar, Nav, Dropdown } from 'rsuite';
+import { browserHistory, Link } from 'react-router';
 import { isLoggedIn, getAuth } from '../../selectors';
 import * as actions from '../../actions';
 import styles from './header.less';
 
 const Header = ({ name, logout, isAuthed }) => (
-  <Navbar inverse collapseOnSelect className={styles.navbar}> 
+  <Navbar appearance="inverse"> 
     <Navbar.Header>
-      <Navbar.Brand>
-        RentalSwag
-      </Navbar.Brand>
-      <Navbar.Toggle />
+      <Link
+        to="/"
+        className="navbar-brand logo"
+      >RentalSwag</Link>
     </Navbar.Header>
-    <Navbar.Collapse>
+    <Navbar.Body>
       <Nav pullRight>
         {
           isAuthed ? 
-            <NavDropdown id="user-dropdown" title={name}>
-              <MenuItem onClick={logout}>Log out</MenuItem>
-            </NavDropdown> :
-            <NavItem 
+            <Dropdown id="user-dropdown" title={name}>
+              <Dropdown.Item onClick={logout}>Log out</Dropdown.Item>
+            </Dropdown> :
+            <Nav.Item 
               onClick={() => browserHistory.push('/account/login')}
-            >Sign In</NavItem>
-        }
-        {
-          isAuthed ?
-            <NavItem 
-              className="visible-xs"
-              onClick={() => browserHistory.push('properties')}
-            >Properties</NavItem> :
-            ''
+            >Sign In</Nav.Item>
         }
       </Nav>
-    </Navbar.Collapse>
+    </Navbar.Body>
   </Navbar>
 );
 
