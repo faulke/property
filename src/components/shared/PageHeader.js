@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button } from 'rsuite';
 import { Link } from 'react-router';
 import styles from './pageHeader.less';
+
+const ButtonLink = props => <Button componentClass={Link} {...props} />;
 
 const PageHeader = ({ title, btnStyle, btnLink, btnTitle }) => (
   <Row className={styles.pageHeader}>
@@ -13,7 +15,10 @@ const PageHeader = ({ title, btnStyle, btnLink, btnTitle }) => (
     {
       btnStyle ?
         <Col sm={5} smPull={1} className={styles.headerRight}>
-          <Link to={btnLink} className={btnStyle}>{btnTitle}</Link>
+          <ButtonLink
+            appearance={btnStyle}
+            to={btnLink}
+          >{btnTitle}</ButtonLink>
         </Col> :
         ''
     }
@@ -34,7 +39,7 @@ PageHeader.propTypes = {
 };
 
 PageHeader.defaultProps = {
-  btnStyle: null,
+  btnStyle: 'default',
   btnLink: null,
   btnTitle: null
 };

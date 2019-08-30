@@ -4,10 +4,8 @@ import PropTypes from 'prop-types';
 import {
   Form,
   FormGroup,
-  FormControl,
   Button,
-  ButtonToolbar,
-  ControlLabel
+  ButtonToolbar
 } from 'rsuite';
 import FormInput from '../shared/FormInput';
 import styles from './forms.less';

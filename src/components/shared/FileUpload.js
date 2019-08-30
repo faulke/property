@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, ControlLabel, Row, Col } from 'react-bootstrap';
+import { FormGroup, ControlLabel, Grid, Row, Col, FormControl } from 'rsuite';
 import * as actions from '../../actions';
 import { fileUpload } from '../../selectors';
 import styles from './fileupload.less';
@@ -26,63 +26,59 @@ class FileUpload extends Component {
     const { files, isUploading, input, label, multiple } = this.props;
     return (
       <FormGroup controlId={input.name} className={styles.container}>
-        <Col componentClass={ControlLabel}>
-          {label}
-        </Col>
-        <Col>
-          <Dropzone 
-            onDrop={this.onDrop}
-            name={input.name}
-            multiple={multiple}
-            className={`${styles.fileupload}`}
-          >
-            <p>Drop files here, or click to select files to upload.</p>
-          </Dropzone>
-          {
-            files.map((file, i) => (
-              <Row key={i} className={styles.fileRow}>
-                <Row className={styles.row}>
-                  <Col sm={12}>
-                    <div className={styles.labelSuccess}>{ i === 0 ? "Cover photo" : "" }</div>
-                  </Col>
-                </Row>
-                <Row className={styles.row}>
-                  <Col xs={4}>
-                    <div
-                      className={styles.filePreview}
-                      name={file.name}
-                      data-index={i}
-                      style={{
-                        backgroundImage: `url(${file.preview})`,
-                        opacity: isUploading ? "0.3" : "1"
-                      }}
-                    >
-                      { isUploading ? <FileLoader /> : '' }
-                    </div>
-                  </Col>
-                  <Col xs={8}>
-                    <textarea rows={4} placeholder="Add a caption..." />
-                  </Col>
-                </Row>
-                <Row className={styles.row}>
-                  <Col xs={4} xsOffset={8} style={{ textAlign: "right" }}>
-                    { 
-                      isUploading ? 
-                        "" :
-                        <a 
-                          role={"button"} 
-                          tabIndex={0}
-                          onClick={() => this.props.deleteFile(i)}
-                        >
-                          X Remove File
-                        </a>
-                    }
-                  </Col>
-                </Row>
+        <ControlLabel>{label}</ControlLabel>
+        <Dropzone 
+          onDrop={this.onDrop}
+          name={input.name}
+          multiple={multiple}
+          className={`${styles.fileupload}`}
+        >
+          <p>Drop files here, or click to select files to upload.</p>
+        </Dropzone>
+        {
+          files.map((file, i) => (
+            <Row key={i} className={styles.fileRow}>
+              <Row className={styles.row}>
+                <Col sm={12}>
+                  <div className={styles.labelSuccess}>{ i === 0 ? "Cover photo" : "" }</div>
+                </Col>
               </Row>
-            ))
-          }
-        </Col>
+              <Row className={styles.row}>
+                <Col xs={4}>
+                  <div
+                    className={styles.filePreview}
+                    name={file.name}
+                    data-index={i}
+                    style={{
+                      backgroundImage: `url(${file.preview})`,
+                      opacity: isUploading ? "0.3" : "1"
+                    }}
+                  >
+                    { isUploading ? <FileLoader /> : '' }
+                  </div>
+                </Col>
+                <Col xs={8}>
+                  <textarea rows={4} placeholder="Add a caption..." />
+                </Col>
+              </Row>
+              <Row className={styles.row}>
+                <Col xs={4} xsOffset={8} style={{ textAlign: "right" }}>
+                  { 
+                    isUploading ? 
+                      "" :
+                      <a 
+                        role={"button"} 
+                        tabIndex={0}
+                        onClick={() => this.props.deleteFile(i)}
+                      >
+                        X Remove File
+                      </a>
+                  }
+                </Col>
+              </Row>
+            </Row>
+          ))
+        }
       </FormGroup>
     );
   }

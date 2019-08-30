@@ -1,7 +1,15 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
-import { Form, FormGroup, Row, Col, Button } from 'react-bootstrap';
+import {
+  Form,
+  FormGroup,
+  Button,
+  ButtonToolbar,
+  Grid,
+  Col,
+  Row
+} from 'rsuite';
 import FormInput from '../shared/FormInput';
 import MapsAutocomplete from '../shared/MapsAutocomplete';
 import FileUpload from '../shared/FileUpload';
@@ -37,6 +45,14 @@ const getComponentForm = () => ({
   }
 });
 
+const handleFormChange = (form, change) => {
+  console.log(form)
+  const fields = Object.keys(form);
+  fields.forEach((field) => {
+    change(field, form[field]);
+  });
+};
+
 const onPlaceChanged = (place, change) => {
   const form = getComponentForm();
   place.address_components.forEach((comp) => {
@@ -68,93 +84,94 @@ const AddPropertyForm = ({
   storageKey,
   change
 }) => (
-  <Form className={styles.form} horizontal onSubmit={handleSubmit}>
+  <Grid>
     <Row>
-      <Col sm={6} smOffset={3}>
-        <Field
-          type="text"
-          name="search"
-          label="Search for address"
-          placeholder="123 Cherry Lane..."
-          component={MapsAutocomplete}
-          className="form-control"
-          onPlaceChanged={place => onPlaceChanged(place, change)}
-        />
+      <Col xs={24} sm={12} md={8}>
+        <Form fluid onChange={form => handleFormChange(form, change)}>
+          <Field
+            id="search"
+            type="text"
+            name="search"
+            label="Search for address"
+            placeholder="123 Cherry Lane..."
+            component={MapsAutocomplete}
+            className="form-control"
+            onPlaceChanged={place => onPlaceChanged(place, change)}
+          />
+          <Field
+            id="address1"
+            type="text"
+            name="address1"
+            label="Address line 1"
+            placeholder="Address line 1"
+            component={FormInput}
+            className="form-control"
+            required
+          />
+          <Field
+            id="address2"
+            type="text"
+            name="address2"
+            label="Address line 2"
+            placeholder="Address line 2"
+            component={FormInput}
+            className="form-control"
+          />
+          <Field
+            id="city"
+            type="text"
+            name="city"
+            label="City"
+            placeholder="City"
+            component={FormInput}
+            className="form-control"
+            required
+          />
+          <Field
+            id="state"
+            type="text"
+            name="state"
+            label="State"
+            placeholder="ST"
+            component={FormInput}
+            className="form-control"
+            required
+          />
+          <Field
+            id="zipcode"
+            type="text"
+            name="zipcode"
+            label="Zip code"
+            placeholder="Zip code"
+            component={FormInput}
+            className="form-control"
+            required
+          />
+          <Field
+            name="files"
+            label="Add a cover image"
+            component={FileUpload}
+            files={files}
+            isUploading={isUploading}
+            uuid={storageKey}
+            multiple={false}
+          />
+          <FormGroup className={styles.formGroup}>
+            <ButtonToolbar>
+              <Button 
+                appearance="primary"
+                type="submit"
+                onClick={handleSubmit}
+                disabled={pristine || isPosting || isUploading}
+              >Add property</Button>
+            </ButtonToolbar>
+          </FormGroup>
+        </Form>
       </Col>
     </Row>
-    <Row>
-      <Col sm={6} smOffset={3}>
-        <Field
-          type="text"
-          name="address1"
-          label="Address line 1"
-          placeholder="Address line 1"
-          component={FormInput}
-          className="form-control"
-          required
-        />
-        <Field
-          type="text"
-          name="address2"
-          label="Address line 2"
-          placeholder="Address line 2"
-          component={FormInput}
-          className="form-control"
-        />
-        <Field
-          type="text"
-          name="city"
-          label="City"
-          placeholder="City"
-          component={FormInput}
-          className="form-control"
-          required
-        />
-        <Field
-          type="text"
-          name="state"
-          label="State"
-          placeholder="ST"
-          component={FormInput}
-          className="form-control"
-          required
-        />
-        <Field
-          type="text"
-          name="zipcode"
-          label="Zip code"
-          placeholder="Zip code"
-          component={FormInput}
-          className="form-control"
-          required
-        />
-      </Col>
-    </Row>
-    <Row style={{ marginBottom: "75px" }}>
-      <Col sm={12} md={6} mdOffset={3}>
-        <Field
-          name="files"
-          label="Add a cover image"
-          component={FileUpload}
-          files={files}
-          isUploading={isUploading}
-          uuid={storageKey}
-          multiple={false}
-        />
-        <FormGroup className={styles.formGroup}>
-          <Col>
-            <Button 
-              className={styles.button} 
-              type="submit" 
-              disabled={pristine || isPosting || isUploading}
-            >
-              Add property
-            </Button>
-          </Col>
-        </FormGroup>
-      </Col>
-    </Row>
-  </Form>
+
+  </Grid>
+
 );
 
 AddPropertyForm.propTypes = {

@@ -13,7 +13,6 @@ const FormInput = ({
   helpLink,
   placeholder,
   input,
-  className,
   meta: { touched, error }
 }) => (
   <FormGroup controlId={name} className={styles.formGroup}>
@@ -28,10 +27,11 @@ const FormInput = ({
         <span className={styles.formHint}>{hint}</span> :
         ''
     }
-    <FormControl
+    <input
       id={id}
+      name={name}
       type={type}
-      className={className}
+      className="rs-input form-control"
       placeholder={placeholder}
       {...input}
     />
@@ -48,7 +48,6 @@ FormInput.propTypes = {
   helpLink: PropTypes.object,
   placeholder: PropTypes.string,
   input: PropTypes.object.isRequired,
-  className: PropTypes.string,
   meta: PropTypes.object.isRequired
 };
 
@@ -58,8 +57,7 @@ FormInput.defaultProps = {
   label: '',
   hint: null,
   helpLink: null,
-  placeholder: '',
-  className: ''
+  placeholder: ''
 };
 
 export default FormInput;

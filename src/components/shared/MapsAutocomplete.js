@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, ControlLabel, Col } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl } from 'rsuite';
 import styles from './formInput.less';
 
 export default class MapsAutocomplete extends Component {
@@ -35,38 +35,36 @@ export default class MapsAutocomplete extends Component {
 
   render() {
     const {
+      id,
       name,
       label,
       placeholder,
-      className,
       input
     } = this.props;
 
     return (
-      <FormGroup controlId={name} className={styles.formGroup}>
-        <Col componentClass={ControlLabel}>
-          {label}
-        </Col>
-        <Col>
-          <input
-            ref={(c) => this._input = c}
-            type="text"
-            name={name}
-            placeholder={placeholder}
-            className={className}
-            {...input}
-          />
-        </Col>
+      <FormGroup controlId={name}>
+        <ControlLabel>{label}</ControlLabel>
+        <input
+          id={id}
+          ref={(c) => this._input = c}
+          type="text"
+          name={name}
+          placeholder={placeholder}
+          className="rs-input form-control"
+          style={{ width: "100%" }}
+          {...input}
+        />
       </FormGroup>
     );
   }
 }
 
 MapsAutocomplete.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
-  className: PropTypes.string,
   input: PropTypes.object.isRequired,
   onPlaceChanged: PropTypes.func.isRequired
 };
@@ -74,6 +72,5 @@ MapsAutocomplete.propTypes = {
 MapsAutocomplete.defaultProps = {
   name: '',
   label: '',
-  placeholder: 'Enter address',
-  className: ''
+  placeholder: 'Enter address'
 };

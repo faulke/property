@@ -6,7 +6,7 @@ import rootReducer from '../reducers/index';
 
 export default function configureStore(initialState) {
   return createStore(
-    rootReducer, 
+    rootReducer,
     initialState,
     applyMiddleware(thunk, apiAuth, apiMiddleware)
   );
