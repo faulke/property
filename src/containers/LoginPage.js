@@ -41,36 +41,9 @@ class LoginPage extends Component {
               isPosting={isPosting}
               loginError={loginError}
             />
-            {/* <Form fluid>
-              <FormGroup>
-                <ControlLabel>Username or email address</ControlLabel>
-                <FormControl name="name" />
-              </FormGroup>
-              <FormGroup>
-                <ControlLabel>Password</ControlLabel>
-                <FormControl name="password" type="password" />
-              </FormGroup>
-              <FormGroup>
-                <ButtonToolbar>
-                  <Button appearance="primary">Sign in</Button>
-                  <Button appearance="link">Forgot password?</Button>
-                </ButtonToolbar>
-              </FormGroup>
-            </Form> */}
           </Panel>
         </FlexboxGrid.Item>
       </FlexboxGrid>
-      // <Grid fluid>
-      //   <Row className={styles.loginHeader}>
-      //     <h1>Sign in</h1>
-      //     <p>Need an account? <Link to="/account/register">Register.</Link></p>
-      //   </Row>
-      //   <Row>
-      //     <Col sm={4} smOffset={4} className={styles.loginContainer}>
-
-      //     </Col>
-      //   </Row>
-      // </Grid>
     );
   }
 }

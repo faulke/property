@@ -1,28 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Button } from 'rsuite';
+import { Grid, Row, Col, Button } from 'rsuite';
 import { Link } from 'react-router';
 import styles from './pageHeader.less';
 
 const ButtonLink = props => <Button componentClass={Link} {...props} />;
 
 const PageHeader = ({ title, btnStyle, btnLink, btnTitle }) => (
-  <Row className={styles.pageHeader}>
-    <Col sm={1} xsHidden />
-    <Col sm={6} xs={12}>
-      <h1 className={styles.headerTitle}>{title}</h1>
-    </Col>
-    {
-      btnStyle ?
-        <Col sm={5} smPull={1} className={styles.headerRight}>
-          <ButtonLink
-            appearance={btnStyle}
-            to={btnLink}
-          >{btnTitle}</ButtonLink>
-        </Col> :
-        ''
-    }
-  </Row>
+  <Grid fluid>
+    <Row className={styles.pageHeader}>
+      <Col md={20} sm={24}>
+        <h1 className={styles.headerTitle}>{title}</h1>
+      </Col>
+      {
+        btnTitle ?
+          <Col md={4} sm={24} className={styles.headerRight}>
+            <ButtonLink
+              appearance={btnStyle}
+              to={btnLink}
+            >{btnTitle}</ButtonLink>
+          </Col> :
+          ''
+      }
+    </Row>
+  </Grid>
+
 );
 
 PageHeader.propTypes = {

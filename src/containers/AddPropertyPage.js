@@ -10,7 +10,6 @@ import * as actions from '../actions/index';
 import AddPropertyForm from '../components/property/AddPropertyForm';
 import { createProperty, fileUpload } from '../selectors';
 import PageHeader from '../components/shared/PageHeader.js';
-import styles from './addProperty.less';
 
 class AddPropertyPage extends Component {
   constructor(props) {
@@ -42,7 +41,7 @@ class AddPropertyPage extends Component {
           <PageHeader
             title={"Add Property"}
             btnLink={"/properties"}
-            btnTitle={<div><i className={styles.left} /> All properties</div>}
+            btnTitle={"All properties"}
           />
         </Header>
         <Content>

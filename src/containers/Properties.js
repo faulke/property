@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, Row } from 'react-bootstrap';
+import { Container, Header, Content } from 'rsuite';
 import * as actions from '../actions/index';
 import { getProperties } from '../selectors';
 import PropertyItem from '../components/property/PropertyItem';
 import Loader from '../components/shared/Loader';
 import PageHeader from '../components/shared/PageHeader';
-import styles from './properties.less';
 import s3Url from '../utils/s3Url';
 
 class Properties extends Component {
@@ -26,14 +25,16 @@ class Properties extends Component {
   render() {
     const { isFetching, properties } = this.props;
     return (
-      <Grid fluid style={{ flex: "auto" }}>
-        <PageHeader
-          title={"Properties"}
-          btnStyle={`btn btn-success ${styles.addProperty}`}
-          btnLink={"properties/add"}
-          btnTitle={"Add property"}
-        />
-        <Row className={styles.propertyRow}>
+      <Container>
+        <Header>
+          <PageHeader
+            title={"Properties"}
+            btnStyle={`primary`}
+            btnLink={"properties/add"}
+            btnTitle={"Add property"}
+          />
+        </Header>
+        <Content>
           { 
             isFetching ? 
               <Loader /> :
@@ -52,8 +53,8 @@ class Properties extends Component {
                   );
                 })
           }
-        </Row>
-      </Grid>
+        </Content>
+      </Container>
     );
   }
 }

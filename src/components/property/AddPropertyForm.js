@@ -76,7 +76,7 @@ const AddPropertyForm = ({
   storageKey,
   change
 }) => (
-  <Grid>
+  <Grid fluid>
     <Row>
       <Col xs={24} sm={12} md={8}>
         <Form fluid>
