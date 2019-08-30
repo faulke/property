@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col } from 'rsuite';
 import { Link } from 'react-router';
 import styles from './propertyItem.less';
 
@@ -15,25 +15,25 @@ const PropertyItem = ({ ...props }) => {
     backgroundPosition: 'center center'
   };
   return (
-    <Link to={`/properties/${props.id}/listing`}>
-      <Col md={6} className={styles.propertyContainer}>
+    <Link to={`/properties/${props.id}/listing`} style={{ color: "black" }}>
+      <Col md={12} className={styles.propertyContainer}>
         <Grid fluid className={styles.property}>
           <Row>
-            <Col sm={12} className={styles.imgContainer}>
+            <Col sm={24} className={styles.imgContainer}>
               <div style={imgStyle} className={styles.img} />
             </Col>
           </Row>
           <Row className={styles.address}>
-            <Col sm={12}>
+            <Col sm={24}>
               <h3>{props.address}</h3>
               <p>{props.city}, {props.state} {props.zipcode}</p>
             </Col>
           </Row>
           <Row>
-            <Col sm={12}>
+            <Col sm={24}>
               <hr className={styles.hr} />
             </Col>
-            <Col sm={12}>
+            <Col sm={24}>
               <p>Additional info here</p>
             </Col>
           </Row>

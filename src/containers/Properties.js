@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Container, Header, Content } from 'rsuite';
+import {
+  Container,
+  Header,
+  Content,
+  Grid,
+  Row,
+  Column
+} from 'rsuite';
 import * as actions from '../actions/index';
 import { getProperties } from '../selectors';
 import PropertyItem from '../components/property/PropertyItem';
 import Loader from '../components/shared/Loader';
 import PageHeader from '../components/shared/PageHeader';
 import s3Url from '../utils/s3Url';
+import styles from './properties.less';
 
 class Properties extends Component {
   componentWillMount() {
@@ -34,25 +42,30 @@ class Properties extends Component {
             btnTitle={"Add property"}
           />
         </Header>
-        <Content>
-          { 
-            isFetching ? 
-              <Loader /> :
-                properties.map((x) => {
-                  const image = s3Url(x);
-                  return (
-                    <PropertyItem
-                      key={x.id}
-                      id={x.id}
-                      address={x.address}
-                      city={x.city}
-                      state={x.state}
-                      zipcode={x.zipcode}
-                      image={image}
-                    />
-                  );
-                })
-          }
+        <Content style={{ backgroundColor: "#FCFCFC" }}>
+          <Grid fluid className={styles.propertyList}>
+            <Row gutter={12}>
+              { 
+                isFetching ? 
+                  <Loader /> :
+                    properties.map((x) => {
+                      const image = s3Url(x);
+                      return (
+                        <PropertyItem
+                          key={x.id}
+                          id={x.id}
+                          address={x.address}
+                          city={x.city}
+                          state={x.state}
+                          zipcode={x.zipcode}
+                          image={image}
+                        />
+                      );
+                    })
+              }
+            </Row>
+          </Grid>
+
         </Content>
       </Container>
     );
