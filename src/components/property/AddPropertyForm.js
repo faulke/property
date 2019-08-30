@@ -45,14 +45,6 @@ const getComponentForm = () => ({
   }
 });
 
-const handleFormChange = (form, change) => {
-  console.log(form)
-  const fields = Object.keys(form);
-  fields.forEach((field) => {
-    change(field, form[field]);
-  });
-};
-
 const onPlaceChanged = (place, change) => {
   const form = getComponentForm();
   place.address_components.forEach((comp) => {
@@ -87,7 +79,7 @@ const AddPropertyForm = ({
   <Grid>
     <Row>
       <Col xs={24} sm={12} md={8}>
-        <Form fluid onChange={form => handleFormChange(form, change)}>
+        <Form fluid>
           <Field
             id="search"
             type="text"

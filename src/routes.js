@@ -8,6 +8,13 @@ import LoginPage from './containers/LoginPage';
 import RegisterPage from './containers/RegisterPage';
 import PropertyDetailPage from './containers/PropertyDetailPage';
 import AddListingPage from './containers/AddListingPage';
+import ListingsPage from './containers/ListingsPage';
+import PaymentsPage from './containers/PaymentsPage';
+import ApplicationsPage from './containers/ApplicationsPage';
+import MaintenancePage from './containers/MaintenancePage';
+import ReportsPage from './containers/ReportsPage';
+import SettingsPage from './containers/SettingsPage';
+
 
 export default (
   <Router>
@@ -19,7 +26,23 @@ export default (
         <Route path="/properties/:id(/:tab)" component={PropertyDetailPage} />
       </Route>
       <Route path="/listings">
+        <IndexRoute component={ListingsPage} />
         <Route path="/listings/:id/new" component={AddListingPage} />
+      </Route>
+      <Route path="/payments">
+        <IndexRoute component={PaymentsPage} />
+      </Route>
+      <Route path="/applications">
+        <IndexRoute component={ApplicationsPage} />
+      </Route>
+      <Route path="/maintenance">
+        <IndexRoute component={MaintenancePage} />
+      </Route>
+      <Route path="/reports">
+        <IndexRoute component={ReportsPage} />
+      </Route>
+      <Route path="/settings">
+        <IndexRoute component={SettingsPage} />
       </Route>
     </Route>
     <Route component={EmptyLayout}>
