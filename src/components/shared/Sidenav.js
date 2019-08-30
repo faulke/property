@@ -1,43 +1,47 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
 import { Sidenav, Nav, Icon } from 'rsuite';
-import * as actions from '../../actions';
 import styles from './sidenav.less';
 
 const NavLink = props => <Nav.Item componentClass={Link} {...props} />;
 
-const Sidebar = ({ ...props }) => (
+const Sidebar = () => (
   <Sidenav className={styles.sidebar}>
     <Sidenav.Body>
       <Nav>
         <NavLink 
           to="/properties"
+          activeClassName={styles.active}
           icon={<Icon icon="home" />}
         >Properties</NavLink>
         <NavLink 
           to="/payments"
+          activeClassName={styles.active}
           icon={<Icon icon="money" />}
         >Payments</NavLink>
         <NavLink 
           to="/listings"
+          activeClassName={styles.active}
           icon={<Icon icon="map-signs" />}
         >Listings</NavLink>
         <NavLink 
           to="/applications"
+          activeClassName={styles.active}
           icon={<Icon icon="file-text-o" />}
         >Applications</NavLink>
         <NavLink 
           to="/maintenance"
+          activeClassName={styles.active}
           icon={<Icon icon="wrench" />}
         >Maintenance</NavLink>
         <NavLink 
           to="/reports"
+          activeClassName={styles.active}
           icon={<Icon icon="line-chart" />}
         >Reports</NavLink>
         <NavLink 
           to="/settings"
+          activeClassName={styles.active}
           icon={<Icon icon="cog" />}
         >Settings</NavLink>
       </Nav>
@@ -45,13 +49,4 @@ const Sidebar = ({ ...props }) => (
   </Sidenav>
 );
 
-Sidebar.propTypes = {
-};
-
-Sidebar.defaultProps = {
-};
-
-const mapStateToProps = state => ({
-});
-
-export default connect(mapStateToProps, actions)(Sidebar);
+export default Sidebar;

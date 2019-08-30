@@ -25,7 +25,7 @@ class MainLayout extends Component {
 
   render() {
     return (
-      <Container>
+      <Container className={styles.main}>
         <Header logout={this.props.logout} />
         <Container>
           <Sidebar className={styles.sidebar}>

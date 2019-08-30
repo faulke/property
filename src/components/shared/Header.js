@@ -12,8 +12,8 @@ const Header = ({ name, logout, isAuthed }) => (
     <Navbar.Header>
       <Link
         to="/"
-        className="navbar-brand logo"
-      >RentalSwag</Link>
+        className={styles.navBrand}
+      >Rental Swag</Link>
     </Navbar.Header>
     <Navbar.Body>
       <Nav pullRight>
