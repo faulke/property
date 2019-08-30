@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router';
-import { Grid, Row, Col } from 'react-bootstrap';
-import FormTemplate from './shared/FormTemplate';
+import { browserHistory, Link } from 'react-router';
+import { FlexboxGrid, Panel } from 'rsuite';
 import * as actions from '../actions/index';
 import { getAuth, isLoggedIn } from '../selectors';
 import RegisterForm from '../components/account/RegisterForm';
-import styles from './login.less';
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -30,20 +28,31 @@ class RegisterPage extends Component {
   render() {
     const { isPosting, registerError } = this.props;
     return (
-      <Grid fluid>
-        <Row className={styles.loginHeader}>
-          <h1>Register</h1>
-        </Row>
-        <Row>
-          <Col sm={4} smOffset={4} className={styles.loginContainer}>
-            <RegisterForm 
-              onSubmit={this.submit} 
-              isPosting={isPosting} 
-              registerError={registerError}
-            />
-          </Col>
-        </Row>
-      </Grid>
+      <div>
+        <FlexboxGrid justify="center">
+          <FlexboxGrid.Item colspan={12} style={{ textAlign: "center" }}>
+            <h2>Register for Rental Swag</h2>
+            <span>
+              Already have an account?
+            </span>
+            &nbsp;
+            <Link
+              to="/account/login"
+            >Sign in here</Link>
+          </FlexboxGrid.Item>
+        </FlexboxGrid>
+        <FlexboxGrid justify="center">
+          <FlexboxGrid.Item colspan={12}>
+            <Panel header={<h3>Register</h3>} bordered>
+              <RegisterForm 
+                onSubmit={this.submit} 
+                isPosting={isPosting} 
+                registerError={registerError}
+              />
+            </Panel>
+          </FlexboxGrid.Item>
+        </FlexboxGrid>
+      </div>
     );
   }
 }

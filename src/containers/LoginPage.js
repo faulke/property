@@ -9,7 +9,6 @@ import {
 import * as actions from '../actions/index';
 import { getAuth, isLoggedIn } from '../selectors';
 import LoginForm from '../components/account/LoginForm';
-import styles from './login.less';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -33,17 +32,31 @@ class LoginPage extends Component {
   render() {
     const { isPosting, loginError } = this.props;
     return (
-      <FlexboxGrid justify="center">
-        <FlexboxGrid.Item colspan={12}>
-          <Panel header={<h3>Login</h3>} bordered>
-            <LoginForm
-              onSubmit={this.submit} 
-              isPosting={isPosting}
-              loginError={loginError}
-            />
-          </Panel>
-        </FlexboxGrid.Item>
-      </FlexboxGrid>
+      <div>
+        <FlexboxGrid justify="center">
+          <FlexboxGrid.Item colspan={12} style={{ textAlign: "center" }}>
+            <h2>Sign in to Rental Swag</h2>
+            <span>
+              Don&apos;t have an account?
+            </span>
+            &nbsp;
+            <Link
+              to="/account/register"
+            >Create one here</Link>
+          </FlexboxGrid.Item>
+        </FlexboxGrid>
+        <FlexboxGrid justify="center">
+          <FlexboxGrid.Item colspan={12}>
+            <Panel header={<h3>Login</h3>} bordered>
+              <LoginForm
+                onSubmit={this.submit} 
+                isPosting={isPosting}
+                loginError={loginError}
+              />
+            </Panel>
+          </FlexboxGrid.Item>
+        </FlexboxGrid>
+      </div>
     );
   }
 }

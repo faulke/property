@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { Form, FormControl, FormGroup, ControlLabel, Col, Button } from 'react-bootstrap';
+import { Form, FormGroup, ButtonToolbar, Button } from 'rsuite';
 import FormInput from '../shared/FormInput';
 import styles from './forms.less';
 
@@ -29,9 +29,10 @@ const passwordHint = `At least 7 characters
   in length and contains 1 uppercase letter,
   1 number, and 1 special character.`;
 
-const RegisterForm = ({ handleSubmit, pristine, isPosting, registerError }) => (
-  <Form horizontal onSubmit={handleSubmit} className={styles.form}>
+const RegisterForm = ({ handleSubmit, isPosting, registerError }) => (
+  <Form onSubmit={handleSubmit}>
     <Field
+      id="firstName"
       type="text"
       name="firstName"
       label="First Name"
@@ -41,6 +42,7 @@ const RegisterForm = ({ handleSubmit, pristine, isPosting, registerError }) => (
       validate={[required]}
     />
     <Field
+      id="lastName"
       type="text"
       name="lastName"
       label="Last Name"
@@ -50,6 +52,7 @@ const RegisterForm = ({ handleSubmit, pristine, isPosting, registerError }) => (
       validate={[required]}
     />
     <Field
+      id="email"
       type="email"
       name="email"
       label="Email"
@@ -59,6 +62,7 @@ const RegisterForm = ({ handleSubmit, pristine, isPosting, registerError }) => (
       validate={[required]}
     />
     <Field
+      id="password"
       type="password"
       name="password"
       label="Password"
@@ -69,6 +73,7 @@ const RegisterForm = ({ handleSubmit, pristine, isPosting, registerError }) => (
       validate={[required, minLength, uppercase, digit, special]}
     />
     <Field
+      id="confirmPassword"
       type="password"
       name="confirmPassword"
       label="Confirm Password"
@@ -83,23 +88,20 @@ const RegisterForm = ({ handleSubmit, pristine, isPosting, registerError }) => (
         ''
     }
     <FormGroup className={styles.formGroup}>
-      <Col>
+      <ButtonToolbar>
         <Button
+          appearance="primary"
           type="submit"
-          bsStyle={"success"}
-          className={styles.button}
           disabled={isPosting}
-        >
-          Register
-        </Button>
-      </Col>
+          onClick={handleSubmit}
+        >Register</Button>
+      </ButtonToolbar>
     </FormGroup>
   </Form>
 );
 
 RegisterForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired,
   isPosting: PropTypes.bool.isRequired,
   registerError: PropTypes.string
 };
